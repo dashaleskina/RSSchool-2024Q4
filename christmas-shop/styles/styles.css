@@ -1,7 +1,20 @@
+:root {
+  --primary-red: #ff4646;
+  --primary-10-red: rgba(255, 70, 70, 0.1);
+  --dark-blue: #181C29;
+  --static-white: #fff;
+  --static-40-white: rgba(255, 255, 255, 0.40);
+  --tag-purple: #4361FF;
+  --tag-pink: #FF43F7;
+  --tag-green: #06A44F;
+  --content-background: #ECF3F8;
+
+}
+
 body {
   width: 1440px;
   box-sizing: border-box;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 }
 
@@ -64,8 +77,8 @@ blockquote {
 
 .nav a:hover {
   border-radius: 12px;
-  background-color: rgba(255, 70, 70, 0.1);
-  color: #ff4646;
+  background-color: var(--primary-10-red);
+  color: var(--primary-red);
 }
 
 .hero {
@@ -75,7 +88,7 @@ blockquote {
   padding: 60px 8px;
   position: relative;
   z-index: 0;
-  background-color: #ff4646;
+  background-color: var(--primary-red);;
   border-radius: 20px 20px 0px 0px;
 }
 
@@ -114,17 +127,23 @@ blockquote {
   padding: 60px 0;
 }
 
-.cursive__caption {
+.caption {
   font-family: Allura;
   font-size: 24px;
   line-height: 24px;
   letter-spacing: 1.2px;
-  text-transform: capitalize;
-  color: #fff;
 }
 
-.hero_no-capitalize {
-  text-transform: lowercase;
+.caption--white {
+  color: var(--static-white);
+}
+
+.caption--black {
+  color: var(--dark-blue);
+}
+
+.caption--red {
+  color: var(--primary-red);;
 }
 
 .hero__title {
@@ -138,18 +157,23 @@ blockquote {
   text-align: center;
 }
 
-.hero_button {
+.button {
   display: flex;
   padding: 20px 32px;
   border-radius: 20px;
-  background-color: #181c29;
+  background-color: var(--dark-blue);
   border-style: none;
-  color: #fff;
+  color: var(--static-white);
   font-family: Montserrat;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.6px;
+}
+
+.button:hover {
+  background-color: var(--static-white);
+  color: var(--dark-blue);
 }
 
 .about {
@@ -159,7 +183,7 @@ blockquote {
   position: relative;
   padding: 60px 8px;
   z-index: 0;
-  background-color: #ff4646;
+  background-color: var(--primary-red);;
 }
 
 .about__container {
@@ -167,7 +191,7 @@ blockquote {
   width: 1276px;
   height: 528px;
   border-radius: 20px;
-  background-color: #fff;
+  background-color: var(--static-white);
 }
 
 .about__info {
@@ -180,16 +204,7 @@ blockquote {
   align-items: flex-start;
 }
 
-.about__info-caption {
-  font-family: Allura;
-  font-size: 24px;
-  line-height: 24px;
-  letter-spacing: 1.2px;
-  text-transform: capitalize;
-  color: #ff4646;
-}
-
-.about__info-title {
+.title {
   font-family: Montserrat;
   font-size: 24px;
   font-weight: 600;
@@ -198,7 +213,11 @@ blockquote {
   letter-spacing: 3.84px;
 }
 
-.about__info-paragraph {
+.title--white {
+  color: var(--static-white);
+}
+
+.paragraph {
   font-family: Montserrat;
   font-size: 16px;
   font-weight: 400;
@@ -216,7 +235,7 @@ blockquote {
   position: relative;
   padding: 60px 0;
   z-index: 0;
-  background-color: #ff4646;
+  background-color: var(--primary-red);;
   overflow: hidden;
 }
 
@@ -226,25 +245,15 @@ blockquote {
   flex-direction: column;
   width: 100%;
   max-width: 1276px;
-
   gap: 20px;
   padding: 0 20px;
 }
 
-.slider__container-header {
+.section__header {
   display: flex;
   flex-direction: column;
   gap: 12px;
   align-items: center;
-}
-.slider__container-header-title {
-  font-family: Montserrat;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 152%;
-  text-transform: uppercase;
-  letter-spacing: 3.84px;
-  color: #fff;
 }
 
 .slider__cards-wrapper {
@@ -267,7 +276,7 @@ blockquote {
   font-size: 80px;
   font-weight: 600;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--static-white);
 }
 .slider__cards-img {
   width: 200px;
@@ -287,15 +296,265 @@ blockquote {
   width: 56px;
   height: 56px;
   border-radius: 20px;
-  border: 1px solid #fff;
+  border: 1px solid var(--static-40-white);
   background-color: transparent;
+  cursor: pointer;
 }
 
-.slider__button img {
-  width: 30px;
-  height: 30px;
-  fill: #333;
+.slider__button:hover {
+  background-color: var(--static-white);
 }
-.slider__buttons-right img {
-  transform: rotate(180deg);
+
+.slider__button:hover .slider__button-icon path {
+  stroke: var(--primary-red);
+  stroke-opacity: 1;
+}
+
+.slider__button-icon--right {
+  rotate: 180deg;
+}
+
+.slider__button--active {
+  border: 1px solid var(--static-white);
+}
+
+.slider__button-active .slider__button-icon path {
+  stroke-opacity: 1;
+}
+
+.slider__button--inactive {
+  pointer-events: none;
+}
+
+.gifts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 60px 0;
+  z-index: 0;
+  background-color: var(--primary-red);
+}
+
+.gifts__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 1276px;
+  height: 434px;
+  border-radius: 20px;
+  gap: 20px;
+}
+
+.gifts__cards {
+  display: flex;
+  gap: 12px;
+}
+
+.gifts__card {
+  display: flex;
+  flex-direction: column;
+  width: 310px;
+  height: 342px;
+  background-color: #ecf3f8;
+  border-radius: 20px;
+}
+
+.gifts__card-caption {
+  display: flex;
+  flex-direction: column;
+  height: 112px;
+  padding: 20px;
+  gap: 8px;
+  align-items: flex-start;
+  background-color: var(--static-white);
+  border-radius: 20px;
+}
+
+.gifts__card-caption-category {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 130%;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.gifts__card-caption-title {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 152%;
+  letter-spacing: 1.28px;
+  text-transform: uppercase;
+}
+
+.gifts__card-caption-category--work {
+  color: var(--tag-purple);
+}
+
+.gifts__card-caption-category--health {
+  color: var(--tag-green);
+}
+
+.gifts__card-caption-category--harmony {
+  color: var(--tag-pink);
+}
+
+.hero__overlay-forest {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-image: url(/christmas-shop/images/bg-forest.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 8px;
+  position: relative;
+  z-index: 0;
+  background-color: var(--primary-red);
+  border-radius: 0 0 20px 20px;
+}
+
+.cta__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 60px 0;
+  max-width: 426px;
+  height: 428px;
+  text-align: center;
+}
+
+.cta__timer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta__timer-list {
+  display: flex;
+  padding: 8px 12px 12px 12px;
+  border-radius: 20px;
+  background-color: var(--static-40-white);
+  color: var(--static-white);
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cta__timer-item {
+  display: flex;
+  flex-direction: column;
+  width: 79px;
+  align-items: center;
+}
+
+.cta__timer-unit {
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 152%;
+  text-transform: uppercase;
+  letter-spacing: 3.84px;
+  color: var(--static-white);
+}
+
+.cta__timer-caption {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 130%;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.cta__time-separator {
+  width: 1px;
+  height: 20px;
+  background-color: var(--static-40-white);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  color: var(--dark-blue);
+  padding: 60px 8px;
+}
+
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  width: 1276px;
+  margin: auto;
+}
+
+.footer__contacts {
+  display: flex;
+  margin-bottom: 60px;
+  gap: 12px;
+}
+
+.footer__contact-card {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  justify-items: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: var(--content-background);
+}
+
+.footer__contact-img {
+  width: 80px;
+  height: 80px;
+}
+
+.footer__contact-info {
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 152%;
+  text-transform: uppercase;
+  letter-spacing: 3.84px;
+}
+
+.footer__contact-title {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 152%;
+  letter-spacing: 1.28px;
+  text-transform: uppercase;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer__socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer__social-item {
+  padding: 8px;
+  list-style: none;
 }
