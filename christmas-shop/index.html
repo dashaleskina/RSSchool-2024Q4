@@ -18,35 +18,37 @@
   <body>
     <header class="header">
       <div class="header__container">
-        <a href="#" class="logo">
+        <a href="#home" class="logo">
           <img src="images/snowflake.svg" alt="Snowflake logo" />
           <span>the gifts</span>
         </a>
         <nav class="nav">
-          <a href="#gifts">gifts</a>
-          <a href="#about">about</a>
-          <a href="#best">best</a>
-          <a href="#contacts">contacts</a>
+          <a href="/christmas-shop/gifts/gifts.html" class="nav__item">gifts</a>
+          <a href="#about" class="nav__item">about</a>
+          <a href="#best" class="nav__item">best</a>
+          <a href="#contacts" class="nav__item">contacts</a>
         </nav>
       </div>
     </header>
 
     <main>
-      <section class="hero">
-        <div class="hero__overlay-ball"></div>
-        <div class="hero__overlay-snow"></div>
+      <section class="hero" id="home">
+        <div class="overlay-ball"></div>
+        <div class="overlay-snow"></div>
         <div class="hero__container">
           <p class="caption caption--white">Merry Christmas</p>
-          <h1 class="hero__title">
-            Gift yourself<br />the magic of new<br />possibilities
+          <h1 class="main-title">
+            Gift yourself<br />the magic of new possibilities
           </h1>
-          <button class="button">Explore Magical Gifts</button>
+          <a href="/christmas-shop/gifts/gifts.html" class="button-link"
+            >Explore Magical Gifts</a
+          >
           <p class="caption caption--white">and Happy New Year</p>
         </div>
       </section>
 
-      <section class="about">
-        <div class="hero__overlay-snow"></div>
+      <section class="about" id="about">
+        <div class="overlay-snow"></div>
 
         <div class="about__container">
           <div class="about__info">
@@ -70,7 +72,7 @@
       </section>
 
       <section class="slider">
-        <div class="hero__overlay-snow"></div>
+        <div class="overlay-snow"></div>
         <div class="slider__container">
           <div class="section__header">
             <p class="caption caption--white">Become Happier!</p>
@@ -147,17 +149,21 @@
         </div>
       </section>
 
-      <section class="gifts">
-        <div class="hero__overlay-snow"></div>
+      <section class="best-gifts" id="best">
+        <div class="overlay-snow"></div>
 
-        <div class="gifts__container">
+        <div class="best-gifts__container">
           <div class="section__header">
             <p class="caption caption--white">Best Gifts</p>
             <h2 class="title title--white">especially for you</h2>
           </div>
           <ul class="gifts__cards">
             <li class="gifts__card">
-              <img src="/christmas-shop/images/gift-for-work.png" alt="Ball with pink preset box" />
+              <img
+                class="gifts__card-image"
+                src="/christmas-shop/images/gift-for-work.png"
+                alt="Ball with pink preset box"
+              />
               <div class="gifts__card-caption">
                 <h4
                   class="gifts__card-caption-category gifts__card-caption-category--work"
@@ -169,7 +175,7 @@
             </li>
             <li class="gifts__card">
               <img
-                class="gifts__card-img"
+                class="gifts__card-image"
                 src="/christmas-shop/images/gift-for-health.png"
                 alt="Ball with snowman"
               />
@@ -184,7 +190,7 @@
             </li>
             <li class="gifts__card">
               <img
-                class="gifts__card-img"
+                class="gifts__card-image"
                 src="/christmas-shop/images/gift-for-work.png"
                 alt="Ball with pink present box"
               />
@@ -199,7 +205,7 @@
             </li>
             <li class="gifts__card">
               <img
-                class="gifts__card-img"
+                class="gifts__card-image"
                 src="/christmas-shop/images/gift-for-harmony.png"
                 alt="Ball with purple tree"
               />
@@ -219,14 +225,16 @@
       </section>
 
       <section class="cta">
-        <div class="hero__overlay-snow"></div>
-        <div class="hero__overlay-forest"></div>
+        <div class="overlay-snow"></div>
+        <div class="overlay-forest"></div>
 
         <div class="cta__container">
           <h2 class="title title--white">
             Ready to start your journey to a better version of yourself?
           </h2>
-          <button class="button">Explore Magical Gifts</button>
+          <a href="/christmas-shop/gifts/gifts.html" class="button-link"
+            >Explore Magical Gifts</a
+          >
           <div class="cta__timer">
             <p class="caption caption--white">The New Year is Coming Soon...</p>
             <div class="cta__timer-list">
@@ -255,10 +263,10 @@
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" id="contacts">
       <div class="footer__container">
-        <ul class="footer__contacts">
-          <li class="footer__contact-card">
+        <div class="footer__contacts">
+          <a href="tel:+375291112233" class="footer__contact-card">
             <img
               class="footer__contact-img"
               src="./images/santa-claus.svg"
@@ -266,9 +274,13 @@
             />
             <p class="footer__contact-info">+375 (29) 111-22-33</p>
             <h3 class="footer__contact-title">Call Us</h3>
-          </li>
+          </a>
 
-          <li class="footer__contact-card">
+          <a
+            class="footer__contact-card"
+            href="https://maps.app.goo.gl/TG6QDNNynnLzY7hm8"
+            target="_blank"
+          >
             <img
               class="footer__contact-img"
               src="./images/christmas-tree.svg"
@@ -276,32 +288,72 @@
             />
             <p class="footer__contact-info">Magic forest</p>
             <h3 class="footer__contact-title">Meet Us</h3>
-          </li>
+          </a>
 
-          <li class="footer__contact-card">
-            <img class="footer__contact-img" src="./images/snake.svg" alt="Snake" />
+          <a
+            class="footer__contact-card"
+            href="mailto:gifts@magic.com"
+            target="_blank"
+          >
+            <img
+              class="footer__contact-img"
+              src="./images/snake.svg"
+              alt="Snake"
+            />
             <p class="footer__contact-info">gifts@magic.com</p>
             <h3 class="footer__contact-title">Write Us</h3>
-          </li>
-        </ul>
+          </a>
+        </div>
 
         <div class="footer__links">
           <ul class="footer__socials">
             <li class="footer__social-item">
-              <img src="/christmas-shop/images/telegram.svg" alt="Telegram icon" />
+              <svg class="footer__social-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M21 5L2 12.5L9 13.5M21 5L18.5 20L9 13.5M21 5L9 13.5M9 13.5V19L12.2488 15.7229" stroke="#181C29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </li>
             <li class="footer__social-item">
-              <img src="/christmas-shop/images/facebook.svg" alt="Facebook icon" />
+              <svg class="footer__social-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M17 2H14C12.6739 2 11.4021 2.52678 10.4645 3.46447C9.52678 4.40215 9 5.67392 9 7V10H6V14H9V22H13V14H16L17 10H13V7C13 6.73478 13.1054 6.48043 13.2929 6.29289C13.4804 6.10536 13.7348 6 14 6H17V2Z" stroke="#181C29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </li>
             <li class="footer__social-item">
-              <img src="/christmas-shop/images/instagram.svg" alt="Instagram icon" />
+              <svg class="footer__social-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="#181C29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="#181C29" stroke-width="1.5"/>
+                <path d="M17.5 6.51L17.51 6.49889" stroke="#181C29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </li>
             <li class="footer__social-item">
-              <img src="/christmas-shop/images/X.svg" alt="X icon" />
+              <svg
+                class="footer__social-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M16.8198 20.7684L3.75317 3.96836C3.44664 3.57425 3.72749 3 4.22678 3H6.70655C6.8917 3 7.06649 3.08548 7.18016 3.23164L20.2468 20.0316C20.5534 20.4258 20.2725 21 19.7732 21H17.2935C17.1083 21 16.9335 20.9145 16.8198 20.7684Z"
+                  stroke="#181C29"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M20 3L4 21"
+                  stroke="#181C29"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
             </li>
           </ul>
           <p class="paragraph">© Copyright 2025, All Rights Reserved</p>
-          <p class="caption caption--black">Made in Rolling Scopes School</p>
+          <a
+            href="https://rs.school/"
+            target="_blank"
+            class="caption caption--black footer__caption"
+            >Made in Rolling Scopes School</a
+          >
         </div>
       </div>
     </footer>
