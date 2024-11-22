@@ -21,7 +21,8 @@ html {
 }
 
 body {
-  width: 1440px;
+  min-inline-size: 380px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -55,13 +56,14 @@ a {
   line-height: 130%;
   letter-spacing: 0.6px;
   text-transform: uppercase;
-  padding: 12px 0;
+  padding: 0 8px;
 }
 
 .header__container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 12px 0;
 }
 
 .logo {
@@ -206,20 +208,31 @@ a {
 
 .about__container {
   display: flex;
-  width: 1276px;
-  height: 528px;
+
+  max-width: 1276px;
+  width: 100%;
   border-radius: 20px;
   background-color: var(--static-white);
+  justify-content: space-between;
 }
 
 .about__info {
   display: flex;
-  gap: 20px;
   padding: 0 60px;
-  width: 528px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  flex: 1 0 0;
+}
+
+.about__info-block {
+  display: flex;
+  max-width: 426px;
+  padding: 60 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .title {
@@ -244,6 +257,12 @@ a {
 
 .about__image {
   border-radius: 20px;
+  background-image: url(../images/santa.png);
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  width: 50%;
+  height: 528px;
 }
 
 .slider {
@@ -251,7 +270,7 @@ a {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 60px 0;
+  padding: 60px 8px;
   z-index: 0;
   background-color: var(--primary-red);
   overflow: hidden;
@@ -351,7 +370,7 @@ a {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 60px 0;
+  padding: 60px 8px;
   z-index: 0;
   background-color: var(--primary-red);
 }
@@ -360,8 +379,8 @@ a {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 1276px;
-  height: 434px;
+  max-width: 1276px;
+  width: 100%;
   border-radius: 20px;
   gap: 20px;
 }
@@ -369,6 +388,8 @@ a {
 .gifts__cards {
   display: flex;
   gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .gifts__card {
@@ -534,7 +555,8 @@ a {
 .footer__container {
   display: flex;
   flex-direction: column;
-  width: 1276px;
+  width: 100%;
+  max-width: 1276px;
   margin: auto;
 }
 
@@ -688,4 +710,26 @@ a {
   gap: 12px;
   align-self: stretch;
   flex-wrap: wrap;
+}
+
+@media (width <= 768px) {
+  .nav {
+    display: none;
+  }
+  .gifts__cards {
+    flex-wrap: wrap;
+  }
+}
+
+@media (width <= 1060px) {
+  .footer__container {
+    margin: 0;
+  }
+  .footer__contacts {
+    flex-direction: column;
+  }
+  .footer__contact-card {
+    width: 100%;
+    padding: 20px 0;
+  }
 }
