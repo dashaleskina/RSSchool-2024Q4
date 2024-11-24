@@ -17,13 +17,13 @@
 html {
   box-sizing: border-box;
   padding: 0;
-  scroll-behavior: smooth;
 }
 
 body {
-  min-width: 380px;
   max-width: 1440px;
+  min-width: 380px;
   margin: 0 auto;
+  width: 100%;
 }
 
 h1,
@@ -269,7 +269,7 @@ a {
   font-family: var(--font-family-montserrat);
   font-size: 24px;
   font-weight: 600;
-  line-height: 36.48px;
+  line-height: 1.52em;
   text-transform: uppercase;
   letter-spacing: 0.16em;
 }
@@ -282,7 +282,7 @@ a {
   font-family: var(--font-family-montserrat);
   font-size: 16px;
   font-weight: 400;
-  line-height: 148%;
+  line-height: 1.48em;
 }
 
 .about__image {
@@ -661,6 +661,11 @@ a {
   gap: 12px;
 }
 
+
+.footer__links .paragraph {
+  line-height: 1.30em;
+}
+
 .footer__social-item {
   padding: 8px;
   list-style: none;
@@ -752,7 +757,7 @@ a {
   flex-wrap: wrap;
 }
 
-@media (width <= 768px) {
+@media screen and (max-width: 768px) {
   .nav {
     display: none;
   }
@@ -764,7 +769,7 @@ a {
   }
 }
 
-@media (width <= 1060px) {
+@media screen and (max-width: 1060px) {
   .footer__container {
     margin: 0;
   }
@@ -777,7 +782,7 @@ a {
   }
 }
 
-@media (width <= 490px) {
+@media screen and (max-width: 490px) {
   .gifts__tabs {
     gap: 0;
   }
@@ -786,7 +791,7 @@ a {
   }
 }
 
-@media (width <= 680px) {
+@media screen and (max-width: 680px) {
   .about__container {
     flex-direction: column;
   }
