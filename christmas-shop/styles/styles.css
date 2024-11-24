@@ -83,11 +83,13 @@ a {
   padding: 12px 20px;
 }
 
-.nav__item:hover {
-  border-radius: 12px;
-  background-color: var(--primary-10-red);
-  color: var(--primary-red);
-  transition: 0.3s;
+@media (hover: hover) {
+  .nav__item:hover {
+    border-radius: 12px;
+    background-color: var(--primary-10-red);
+    color: var(--primary-red);
+    transition: 0.3s;
+  }
 }
 
 .nav__item--active {
@@ -104,8 +106,10 @@ a {
   position: relative;
 }
 
-.header__menu:hover {
-  cursor: pointer;
+@media (hover: hover) {
+  .header__menu:hover {
+    cursor: pointer;
+  }
 }
 
 .header__menu-line {
@@ -119,7 +123,7 @@ a {
 }
 
 .menu-line-bottom {
-  top: 24px
+  top: 24px;
 }
 
 .hero {
@@ -215,10 +219,12 @@ a {
   letter-spacing: 0.6px;
 }
 
-.button-link:hover {
-  background-color: var(--static-white);
-  color: var(--dark-blue);
-  transition: 0.3s;
+@media (hover: hover) {
+  .button-link:hover {
+    background-color: var(--static-white);
+    color: var(--dark-blue);
+    transition: 0.3s;
+  }
 }
 
 .about {
@@ -362,15 +368,16 @@ a {
   cursor: pointer;
 }
 
-.slider__button:hover {
-  background-color: var(--static-white);
-  transition: 0.3s;
-}
-
-.slider__button:hover .slider__button-icon path {
-  stroke: var(--primary-red);
-  stroke-opacity: 1;
-  transition: 0.3s;
+@media (hover: hover) {
+  .slider__button:hover {
+    background-color: var(--static-white);
+    transition: 0.3s;
+  }
+  .slider__button:hover .slider__button-icon path {
+    stroke: var(--primary-red);
+    stroke-opacity: 1;
+    transition: 0.3s;
+  }
 }
 
 .slider__button-icon--right {
@@ -467,10 +474,13 @@ a {
   text-overflow: ellipsis;
 }
 
-.gifts__card:hover .gifts__card-caption-title {
-  color: var(--primary-red);
-  transition: 0.3s;
+@media (hover: hover) {
+  .gifts__card:hover .gifts__card-caption-title {
+    color: var(--primary-red);
+    transition: 0.3s;
+  }
 }
+
 .gifts__card-caption-category--work {
   color: var(--tag-purple);
 }
@@ -609,9 +619,11 @@ a {
   background-color: var(--content-background);
 }
 
-.footer__contact-card:hover {
-  color: var(--primary-red);
-  transition: 0.3s;
+@media (hover: hover) {
+  .footer__contact-card:hover {
+    color: var(--primary-red);
+    transition: 0.3s;
+  }
 }
 
 .footer__contact-img {
@@ -660,14 +672,15 @@ a {
   height: 24px;
 }
 
-.footer__social-item:hover .footer__social-icon path {
-  stroke: var(--primary-red);
-  transition: 0.3s;
-}
-
-.footer__caption:hover {
-  color: var(--primary-red);
-  transition: 0.3s;
+@media (hover: hover) {
+  .footer__social-item:hover .footer__social-icon path {
+    stroke: var(--primary-red);
+    transition: 0.3s;
+  }
+  .footer__caption:hover {
+    color: var(--primary-red);
+    transition: 0.3s;
+  }
 }
 
 /* GIFTS PAGE */
@@ -783,5 +796,38 @@ a {
   }
   .about__image {
     width: 100%;
+  }
+}
+
+@media (hover: none) {
+  .nav__item:hover {
+    background-color: inherit;
+    color: inherit;
+  }
+  .button-link:hover {
+    background-color: var(--dark-blue);
+    color: var(--static-white);
+  }
+  .slider__button:hover {
+    background-color: transparent;
+  }
+  .slider__button:hover .slider__button-icon path {
+    stroke: var(--static-white);
+    stroke-opacity: 1;
+  }
+  .gifts__card:hover .gifts__card-caption-title {
+    color: inherit;
+  }
+  .footer__contact-card:hover {
+    color: inherit;
+  }
+  .footer__social-item:hover .footer__social-icon path {
+    stroke: var(--dark-blue);
+  }
+  .footer__caption:hover {
+    color: inherit;
+  }
+  .gifts__tabs-item:hover {
+    background-color: inherit;
   }
 }
