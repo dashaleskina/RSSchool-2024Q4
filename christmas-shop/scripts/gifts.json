@@ -35,7 +35,6 @@
     },
     "image": "../images/gift-for-work.png"
   },
-
   {
     "name": "Shortcut Cheater",
     "description": "Knows every keyboard shortcut like they were born with them.",
@@ -48,7 +47,6 @@
     },
     "image": "../images/gift-for-work.png"
   },
-
   {
     "name": "Posture Levitation",
     "description": "Can sit for hours, but maintains perfect posture like a ballerina.",
@@ -97,7 +95,6 @@
     },
     "image": "../images/gift-for-harmony.png"
   },
-
   {
     "name": "Hydration Bot",
     "description": "Drinks the recommended 2 liters of water a day like a health-programmed robot.",
@@ -110,7 +107,6 @@
     },
     "image": "../images/gift-for-health.png"
   },
-
   {
     "name": "Merge Master",
     "description": "Merges branches in Git without conflicts, like a wizard during an exam.",
@@ -159,7 +155,6 @@
     },
     "image": "../images/gift-for-health.png"
   },
-
   {
     "name": "Async Tamer",
     "description": "Handles asynchronous code and promises like well-trained pets.",
@@ -184,7 +179,6 @@
     },
     "image": "../images/gift-for-harmony.png"
   },
-
   {
     "name": "CSS Tamer",
     "description": "Can make Flexbox and Grid work together like they were always best friends.",
@@ -221,7 +215,6 @@
     },
     "image": "../images/gift-for-harmony.png"
   },
-
   {
     "name": "Time Hacker",
     "description": "Writes code at the last moment but always meets the deadline.",
@@ -234,7 +227,6 @@
     },
     "image": "../images/gift-for-work.png"
   },
-
   {
     "name": "Layout Master",
     "description": "Creates perfect layouts on the first try, like they can read the designer's mind.",
@@ -271,7 +263,6 @@
     },
     "image": "../images/gift-for-harmony.png"
   },
-
   {
     "name": "Documentation Whisperer",
     "description": "Understands cryptic documentation as if they wrote it themselves.",
@@ -308,7 +299,6 @@
     },
     "image": "../images/gift-for-health.png"
   },
-
   {
     "name": "Code Minimalist",
     "description": "Writes code so concise that one line does more than a whole file.",
@@ -333,7 +323,6 @@
     },
     "image": "../images/gift-for-harmony.png"
   },
-
   {
     "name": "Pixel-Perfect Magician",
     "description": "Aligns elements to the last pixel, even when the design looks abstract.",
@@ -346,7 +335,6 @@
     },
     "image": "../images/gift-for-work.png"
   },
-
   {
     "name": "Sleep Overlord",
     "description": "Sleeps 6 hours but feels like they had 10.",
@@ -359,7 +347,6 @@
     },
     "image": "../images/gift-for-health.png"
   },
-
   {
     "name": "Break Guru",
     "description": "Takes a stretch break every hour without forgetting, no matter how focused.",
@@ -384,7 +371,6 @@
     },
     "image": "../images/gift-for-harmony.png"
   },
-
   {
     "name": "Eye Protector",
     "description": "Can work all day at the monitor without feeling like their eyes are on fire.",
@@ -397,7 +383,6 @@
     },
     "image": "../images/gift-for-health.png"
   },
-
   {
     "name": "Stress Dodger",
     "description": "Masters meditation right at the keyboard.",
@@ -434,7 +419,6 @@
     },
     "image": "../images/gift-for-work.png"
   },
-
   {
     "name": "Music Code Curator",
     "description": "Creates work playlists so good, even deadlines follow the rhythm.",

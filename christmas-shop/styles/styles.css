@@ -417,10 +417,20 @@ a {
   gap: 20px;
 }
 
-.gifts__cards {
+/* .gifts__cards {
   display: flex;
   gap: 12px;
   justify-content: center;
+  flex-wrap: wrap;
+} */
+
+.gifts__cards-list {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 12px;
+  align-self: stretch;
   flex-wrap: wrap;
 }
 
@@ -748,22 +758,9 @@ a {
   pointer-events: none;
 }
 
-.gifts__cards-list {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  align-content: flex-start;
-  gap: 12px;
-  align-self: stretch;
-  flex-wrap: wrap;
-}
-
 @media screen and (max-width: 768px) {
   .nav {
     display: none;
-  }
-  .gifts__cards {
-    flex-wrap: wrap;
   }
   .header__menu {
     display: block;
