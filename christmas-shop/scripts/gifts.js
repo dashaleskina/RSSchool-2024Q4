@@ -2,7 +2,7 @@ import { createCard } from "./utils.js";
 
 //находим необходимые нам элементы
 const giftsCardsList = document.querySelector(".gifts__cards-list"); // список для карточек
-const categoryTabs = document.querySelectorAll(".gifts__tabs-item");
+const categoryTabs = document.querySelectorAll(".gifts__tabs-item"); // сборка табов для обработки смены категорий
 
 //отрисовываем карточки на странице gifts
 fetch("../scripts/gifts.json")
@@ -49,3 +49,5 @@ function handleCategoryTabs(data) {
     });
   });
 }
+
+
