@@ -17,6 +17,7 @@
 html {
   box-sizing: border-box;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -672,9 +673,8 @@ a {
   gap: 12px;
 }
 
-
 .footer__links .paragraph {
-  line-height: 1.30em;
+  line-height: 1.3em;
 }
 
 .footer__social-item {
@@ -758,12 +758,42 @@ a {
   pointer-events: none;
 }
 
+.up-button {
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  border-radius: 100px;
+  border: 1px solid var(--primary-red);
+  background-color: var(--static-white);
+  cursor: pointer;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
 @media screen and (max-width: 768px) {
   .nav {
     display: none;
   }
   .header__menu {
     display: block;
+  }
+  .up-button-visible {
+    bottom: 15px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .up__button-icon {
+    rotate: 90deg;
+  }
+
+  .up__button-icon path {
+    stroke: var(--primary-red);
   }
 }
 
