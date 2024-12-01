@@ -14,7 +14,7 @@ function getCategoryModifier(category) {
 }
 
 //создаем карточку товара при помощи темплейта
-function createCard(cardData) {
+function createCard(cardData, onClick) {
   const giftCardTemplate = document.querySelector("#card-template").content;
   const cardElement = giftCardTemplate
     .querySelector(".gifts__card")
@@ -32,8 +32,14 @@ function createCard(cardData) {
   cardCategory.classList.add(
     `gifts__card-caption-category--${categoryModifier}`
   );
+
+  cardData.categoryModifier = categoryModifier;
+  
   const cardTitle = cardElement.querySelector(".gifts__card-caption-title");
   cardTitle.textContent = cardData.name;
+
+  // Добавляем обработчик на изображение в карточке
+  cardElement.addEventListener('click', () => onClick(cardData));
 
   return cardElement;
 }
