@@ -9,8 +9,8 @@ const upButton = document.querySelector(".up-button"); // кнопка scroll-to
 fetch("../scripts/gifts.json")
   .then((response) => response.json())
   .then((data) => {
-      displayCards(data);
-      handleCategoryTabs(data);
+    displayCards(data);
+    handleCategoryTabs(data);
   })
   .catch((error) => {
     console.error("Ошбика при загрузке данных", error);
@@ -52,6 +52,6 @@ function handleCategoryTabs(data) {
 }
 
 //переключаем класс на кнопке "вверх" при скролле на 300px
-window.addEventListener('scroll', () => {
-  upButton.classList.toggle("up-button-visible", window.scrollY > 300)
-})
+window.addEventListener("scroll", () => {
+  upButton.classList.toggle("up-button-visible", window.scrollY > 300);
+});
