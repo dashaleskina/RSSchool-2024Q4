@@ -19,27 +19,36 @@ fetch("../scripts/gifts.json")
 //обработаем клика на табы
 function handleCategoryTabs(data) {
   categoryTabs.forEach((item) => {
+    item.addEventListener("touchstart", (e) => {
+      e.preventDefault(); 
+      handleTabClick(item, data);
+    });
+
     item.addEventListener("click", () => {
-      let sortedCards;
-      const categoryText = item.textContent.toLowerCase();
-
-      if (categoryText === "all") {
-        sortedCards = data;
-      } else {
-        sortedCards = data.filter((card) =>
-          card.category.toLowerCase().includes(categoryText)
-        );
-      }
-
-      displayCards(sortedCards, giftsCardsList);
-
-      //удаляем активный класс у всех кнопок и переключаем на новый
-      categoryTabs.forEach((item) =>
-        item.classList.remove("gifts__tabs-item--active")
-      );
-      item.classList.add("gifts__tabs-item--active");
+      handleTabClick(item, data);
     });
   });
+}
+
+function handleTabClick(clickedTab, data) {
+  let sortedCards;
+  const categoryText = clickedTab.textContent.toLowerCase();
+
+  if (categoryText === "all") {
+    sortedCards = data;
+  } else {
+    sortedCards = data.filter((card) =>
+      card.category.toLowerCase().includes(categoryText)
+    );
+  }
+
+  displayCards(sortedCards, giftsCardsList);
+
+
+  categoryTabs.forEach((tab) =>
+    tab.classList.remove("gifts__tabs-item--active")
+  );
+  clickedTab.classList.add("gifts__tabs-item--active");
 }
 
 //переключаем класс на кнопке "вверх" при скролле на 300px
