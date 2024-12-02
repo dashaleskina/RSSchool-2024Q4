@@ -31,7 +31,7 @@ function handleCategoryTabs(data) {
         );
       }
 
-      displayCards(sortedCards);
+      displayCards(sortedCards, giftsCardsList);
 
       //удаляем активный класс у всех кнопок и переключаем на новый
       categoryTabs.forEach((item) =>
