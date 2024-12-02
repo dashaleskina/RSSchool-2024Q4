@@ -1,4 +1,4 @@
-import { createCard, shuffleCards } from "./utils.js";
+import { shuffleCards, displayCards} from "./utils.js";
 
 //находим необходимые нам элементы в дереве
 const giftsCardsList = document.querySelector(".gifts__cards-list"); //список для карточек
@@ -13,14 +13,12 @@ fetch("../scripts/gifts.json")
   .then((data) => {
     shuffleCards(data);
     const choosenCards = data.slice(0, 4);
-    choosenCards.forEach((cardData) => {
-      const card = createCard(cardData);
-      giftsCardsList.appendChild(card);
-    });
+    displayCards(choosenCards, giftsCardsList);
   })
   .catch((error) => {
     console.error("Ошбика при загрузке данных", error);
   });
+
 
 
   //таймер
