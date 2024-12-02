@@ -1,4 +1,4 @@
-import { displayCards } from "./utils.js";
+import { displayCards, turnOnMenu } from "./utils.js";
 
 //находим необходимые нам элементы
 const giftsCardsList = document.querySelector(".gifts__cards-list"); // список для карточек
@@ -46,4 +46,8 @@ function handleCategoryTabs(data) {
 window.addEventListener("scroll", () => {
   upButton.classList.toggle("up-button-visible", window.scrollY > 300);
 });
+
+
+//вызываем функцию открытия меню
+document.addEventListener('DOMContentLoaded', turnOnMenu)
 

@@ -16,6 +16,11 @@ const cardSuperpowerPoints = document.querySelectorAll(
 );
 const closeModalButton = document.querySelector(".popup-icon");
 
+const menuButton = document.querySelector('.header__menu');
+const menuLines = document.querySelectorAll('.header__menu-line');
+const navSidebar = document.querySelector('.nav-sidebar');
+const navLinks = document.querySelectorAll('.nav-sidebar .nav__item');
+
 function getCategoryModifier(category) {
   const categoryLowerCase = category.toLowerCase();
 
@@ -26,6 +31,73 @@ function getCategoryModifier(category) {
   } else if (categoryLowerCase.includes("harmony")) {
     return "harmony";
   }
+}
+
+function toggleBurgerLines(menuLines) {
+  menuLines.forEach(line => {
+      if (line.classList.contains('line-top')) {
+          line.classList.toggle('line-top--active');
+      }
+      if (line.classList.contains('line-bottom')) {
+          line.classList.toggle('line-bottom--active');
+      }
+  });
+}
+
+function togglePageScroll() {
+  document.body.classList.toggle('body--locked');
+}
+
+
+function smoothScrollToElement(targetElement) {
+  targetElement.scrollIntoView({
+      behavior: 'smooth'
+  });
+}
+
+function handleNavLinkClick(e, link, toggleMenu) {
+  if (link.getAttribute('href').startsWith('#')) {
+      e.preventDefault();
+      const targetId = link.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+          toggleMenu();
+          smoothScrollToElement(targetElement);
+      }
+  } else {
+      toggleMenu();
+  }
+}
+
+function resetMobileMenu(navSidebar, menuLines) {
+  navSidebar.classList.remove('nav-sidebar--active');
+  menuLines.forEach(line => {
+      line.classList.remove('line-top--active');
+      line.classList.remove('line-bottom--active');
+  });
+  document.body.classList.remove('body--locked');
+}
+
+export function turnOnMenu() {
+
+  function toggleMenu() {
+      toggleBurgerLines(menuLines);
+      navSidebar.classList.toggle('nav-sidebar--active');
+      togglePageScroll();
+  }
+  
+  menuButton.addEventListener('click', toggleMenu);
+  
+  navLinks.forEach(link => {
+      link.addEventListener('click', (e) => handleNavLinkClick(e, link, toggleMenu));
+  });
+  
+  window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+          resetMobileMenu(navSidebar, menuLines);
+      }
+  });
 }
 
 //создаем карточку товара при помощи темплейта
@@ -128,7 +200,7 @@ export function openPopup(cardPopup) {
     cardPopup.classList.add("popup_opened");
     document.addEventListener("keydown", closeByKeydown);
     cardPopup.addEventListener("click", clickOnOverlay);
-    document.documentElement.style.overflow = "hidden"
+    document.documentElement.style.overflow = "hidden";
   }
 }
 
@@ -138,7 +210,7 @@ export function closePopup() {
     cardPopup.classList.remove("popup_opened");
     document.removeEventListener("keydown", closeByKeydown);
     cardPopup.removeEventListener("click", clickOnOverlay);
-    document.documentElement.style.overflow = ""
+    document.documentElement.style.overflow = "";
   }
 }
 

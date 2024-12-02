@@ -120,12 +120,30 @@ a {
   background-color: #181c29;
   position: absolute;
   left: 10px;
-  top: 16px;
   border-radius: 20px;
 }
 
-.menu-line-bottom {
-  top: 24px;
+.line-top {
+  top: 15px;
+  transition: all 0.3s ease;
+}
+
+.line-top--active {
+  transform: rotate(-45deg);
+  top: 18px;
+}
+.line-bottom {
+  top: 23px;
+  transition: all 0.3s ease;
+}
+
+.line-bottom--active {
+  transform: rotate(45deg);
+  top: 18px;
+}
+
+.nav-sidebar {
+  display: none;
 }
 
 .hero {
@@ -772,8 +790,8 @@ a {
   background-color: var(--static-white);
   cursor: pointer;
   position: fixed;
-  bottom: 30px;
-  right: 15px;
+  bottom: 26px;
+  right: 7px;
   opacity: 0;
   pointer-events: none;
   transition: all 0.5s ease;
@@ -786,6 +804,49 @@ a {
   .header__menu {
     display: block;
   }
+  .header {
+    position: relative;
+    z-index: 10;
+    background-color: var(--static-white);
+  }
+  .nav-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    bottom: 0;
+    width: 100%;
+    padding-top: 60px;
+    background-color: var(--static-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    line-height: 36.48px;
+    letter-spacing: 3.84px;
+    transition: right 0.3s ease;
+    z-index: 9;
+  }
+  .nav-sidebar ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .nav-sidebar li {
+    padding: 12px 20px;
+    list-style: none;
+  }
+  .nav-sidebar--active {
+    right: 0;
+  }
+  .body--locked {
+    overflow: hidden;
+  }
+  .header__menu,
+  .logo {
+    z-index: 11;
+  }
   .up-button-visible {
     bottom: 15px;
     opacity: 1;
@@ -797,6 +858,18 @@ a {
 
   .up__button-icon path {
     stroke: var(--primary-red);
+  }
+
+  .line-top--active {
+    transform: rotate(-45deg);
+    top: 18px;
+    transition: all 0.3s ease;
+  }
+
+  .line-bottom--active {
+    transform: rotate(45deg);
+    top: 18px;
+    transition: all 0.3s ease;
   }
 }
 
@@ -939,7 +1012,7 @@ a {
 }
 
 .card-caption-paragraph {
-  font-family: Montserrat;
+  font-family: var(--font-family-montserrat);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -955,7 +1028,7 @@ a {
 }
 
 .card-superpowers-title {
-  font-family: Montserrat;
+  font-family: var(--font-family-montserrat);
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
@@ -980,7 +1053,7 @@ a {
 }
 
 .card-superpowers-table-superpower {
-  font-family: Montserrat;
+  font-family: var(--font-family-montserrat);
   font-size: 16px;
   font-style: normal;
   text-transform: capitalize;
@@ -990,7 +1063,7 @@ a {
 }
 
 .card-superpowers-table-points {
-  font-family: Montserrat;
+  font-family: var(--font-family-montserrat);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

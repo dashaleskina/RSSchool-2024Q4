@@ -1,4 +1,4 @@
-import { shuffleCards, displayCards } from "./utils.js";
+import { shuffleCards, displayCards, turnOnMenu } from "./utils.js";
 
 //находим необходимые нам элементы в дереве
 //для вывода карточек
@@ -56,8 +56,6 @@ let maxCountOfSteps = window.innerWidth > 768 ? 3 : 6;
 let positionX = 0;
 
 let sizeOfStep = countSliderShift();
-
-
 
 //посчитаем кол-во шагов требуемое для определенной ширины
 function countSliderShift() {
@@ -124,7 +122,9 @@ function turnOnSlider() {
   window.addEventListener('resize', resizeSlider);
   changeButtonsStatus();
 }
-
-document.addEventListener('DOMContentLoaded', turnOnSlider)
 //СЛАЙДЕР
-console.log(countOfSteps());
+
+
+// вызываем функции после загрузки DOM
+document.addEventListener('DOMContentLoaded', turnOnSlider)
+document.addEventListener('DOMContentLoaded', turnOnMenu)
