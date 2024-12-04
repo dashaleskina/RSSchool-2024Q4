@@ -20,7 +20,7 @@ fetch("../scripts/gifts.json")
 function handleCategoryTabs(data) {
   categoryTabs.forEach((item) => {
     item.addEventListener("touchstart", (e) => {
-      e.preventDefault(); 
+      e.preventDefault();
       handleTabClick(item, data);
     });
 
@@ -53,7 +53,7 @@ function handleTabClick(clickedTab, data) {
 
 //переключаем класс на кнопке "вверх" при скролле на 300px
 window.addEventListener("scroll", () => {
-  upButton.classList.toggle("up-button-visible", window.scrollY > 300);
+  upButton.classList.toggle("up-button-visible", window.scrollY >= 300);
 });
 
 
