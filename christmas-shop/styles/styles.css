@@ -60,6 +60,7 @@ a {
   letter-spacing: 0.6px;
   text-transform: uppercase;
   padding: 0 8px;
+  z-index: 99;
 }
 
 .header__container {
@@ -949,10 +950,10 @@ a {
   display: none;
   align-items: center;
   justify-content: center;
-  /* padding: 0 8px 0 0; */
   top: 0;
   left: 0;
   background-color: rgba(24, 28, 41, 0.8);
+  z-index: 100;
 }
 
 .popup_opened {
@@ -969,6 +970,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 101;
 }
 
 .popup-icon {
