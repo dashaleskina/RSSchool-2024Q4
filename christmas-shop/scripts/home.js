@@ -60,13 +60,13 @@ let sizeOfStep = countSliderShift();
 //посчитаем кол-во шагов требуемое для определенной ширины
 function countSliderShift() {
   let hiddenPartOfSlider = slider.scrollWidth - sliderContainer.clientWidth;
-  return hiddenPartOfSlider / maxCountOfSteps;
+  return Math.ceil(hiddenPartOfSlider / maxCountOfSteps);
 }
 
 
 //изменяем css свойства для того чтобы слайдер ожил
 function scrollSlider(position) {
-  positionX = position;
+  positionX = Math.min(position, slider.scrollWidth - sliderContainer.clientWidth);
   slider.style.transform = `translateX(-${position}px)`;
   slider.style.transition = `transform 0.5s ease-in-out`;
   changeButtonsStatus();
