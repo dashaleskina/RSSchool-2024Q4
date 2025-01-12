@@ -5,6 +5,7 @@ import {
   hardLevelSet,
   createSequence,
   clearContainer,
+  createKeyboard
 } from "./utils.js";
 
 // Global Variables
@@ -48,7 +49,6 @@ function createStartScreen(container) {
     return button;
   });
 
-
   const roundNumber = document.createElement("div");
   roundNumber.className = "roundNumber";
   roundNumber.textContent = "Your level:".toUpperCase();
@@ -66,6 +66,12 @@ function createStartScreen(container) {
   inputScreen.id = "inputScreen";
   inputScreen.readOnly = true;
   container.appendChild(inputScreen);
+
+  // Container for buttons
+  const buttonsContainer = document.createElement("div");
+  buttonsContainer.className = "buttons";
+  container.appendChild(buttonsContainer);
+  createKeyboard(currentDifficultyLevel, buttonsContainer)
 }
 
 function initializeGame() {

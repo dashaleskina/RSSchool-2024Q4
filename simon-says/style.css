@@ -68,16 +68,16 @@ body {
 }
 
 .roundNumber {
-    width: 50%;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    background-color: #cec0b7;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 20px;
-  }
+  width: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: #cec0b7;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 20px;
+}
 
 .screen {
   display: flex;
@@ -92,4 +92,36 @@ body {
   box-shadow: inset 0px 4px 3px 0px rgba(0, 0, 0, 0.5);
   border: 5px solid black;
   border-radius: 30%;
+}
+
+#roundNumberScreen {
+    width: 75px;
+    height: 75px;
+  }
+
+.buttons {
+  display: flex;
+  max-width: 800px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px 0 10px 0;
+  padding: 10px;
+  background-color: #cec0b7;
+  border-radius: 5px;
+}
+
+button {
+  background: rgb(255, 255, 255);
+  font-size: 20px;
+  color: #b14f1e;
+  width: 50px;
+  height: 50px;
+  border: 5px solid #e4d8ca;
+  border-radius: 7px;
+  box-shadow: 2px 5px 0px rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  transition: all 0.2s;
+  top: 0;
+  cursor: pointer;
+  margin: 4px;
 }

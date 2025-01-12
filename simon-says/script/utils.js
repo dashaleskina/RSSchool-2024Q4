@@ -59,3 +59,21 @@ export function clearContainer(container) {
     container.removeChild(container.firstChild);
   }
 }
+
+export function createKeyboard(level, container) {
+  clearContainer(container);
+
+  let setOfSymbols =
+    level === "easy"
+      ? easyLevelSet
+      : level === "medium"
+      ? mediumLevelSet
+      : hardLevelSet;
+
+  setOfSymbols.forEach((symbol) => {
+    const button = document.createElement("button");
+    button.textContent = symbol;
+    button.disabled = true;
+    container.appendChild(button);
+  });
+}
