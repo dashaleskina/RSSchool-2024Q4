@@ -28,3 +28,25 @@ export const mediumLevelSet = [
   "M",
 ];
 export const hardLevelSet = easyLevelSet.concat(mediumLevelSet);
+
+export function createSequence(difficultyLevel, round) {
+  let setOfSymbols = [];
+  if (difficultyLevel === "easy") {
+    setOfSymbols = easyLevelSet;
+  } else if (difficultyLevel === "medium") {
+    setOfSymbols = mediumLevelSet;
+  } else {
+    setOfSymbols = hardLevelSet;
+  }
+
+  const sequence = [];
+  const sequenceLength = 2 * round;
+
+  for (let i = 0; i < sequenceLength; i++) {
+    const index = Math.floor(Math.random() * setOfSymbols.length);
+    sequence.push(setOfSymbols[index]);
+  }
+
+  console.log("Generated sequence:", sequence);
+  return sequence;
+}
