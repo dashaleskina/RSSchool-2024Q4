@@ -52,3 +52,10 @@ export function createSequence(difficultyLevel, round) {
   console.log("Generated sequence:", sequence);
   return sequence;
 }
+
+//clear container
+export function clearContainer(container) {
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+}

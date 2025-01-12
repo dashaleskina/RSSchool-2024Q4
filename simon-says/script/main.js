@@ -1,3 +1,6 @@
+// Imports
+import { easyLevelSet, mediumLevelSet, hardLevelSet, createSequence, clearContainer} from "./utils.js";
+
 // Global Variables
 let setsOfDiffuculties = ["easy", "medium", "hard"];
 
