@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: "Agdasima", sans-serif;
 }
+
 body {
   display: flex;
   justify-content: center;
@@ -21,3 +22,18 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+.screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+    width: 100%;
+    background-color: #bfc0a1;
+    font-size: 40px;
+    text-align: center;
+    padding: 4px;
+    box-shadow: inset 0px 4px 3px 0px rgba(0, 0, 0, 0.5);
+    border: 5px solid black;
+    border-radius: 30%;
+  }

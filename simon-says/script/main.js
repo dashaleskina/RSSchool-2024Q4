@@ -18,7 +18,13 @@ let userInput = [];
 let errorsPerRound = 0;
 
 function createStartScreen(container) {
-  //sample for create start screen
+  clearContainer(container);
+
+  const inputScreen = document.createElement("input");
+  inputScreen.className = "screen";
+  inputScreen.id = "inputScreen";
+  inputScreen.readOnly = true;
+  container.appendChild(inputScreen);
 }
 
 function initializeGame() {
@@ -30,7 +36,7 @@ function initializeGame() {
   } else {
     clearContainer(gamepad);
   }
-  createStartScreen();
+  createStartScreen(gamepad);
 }
 
 initializeGame();
