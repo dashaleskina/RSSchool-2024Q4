@@ -7,3 +7,14 @@ let currentSequence = [];
 
 let userInput = [];
 let errorsPerRound = 0;
+
+function createStartScreen(container) {
+  //sample for create start screen
+}
+
+function initializeGame() {
+  createStartScreen();
+  //sample for initialize game
+}
+
+initializeGame();
