@@ -1,5 +1,11 @@
 // Imports
-import { easyLevelSet, mediumLevelSet, hardLevelSet, createSequence, clearContainer} from "./utils.js";
+import {
+  easyLevelSet,
+  mediumLevelSet,
+  hardLevelSet,
+  createSequence,
+  clearContainer,
+} from "./utils.js";
 
 // Global Variables
 let setsOfDiffuculties = ["easy", "medium", "hard"];
@@ -16,8 +22,15 @@ function createStartScreen(container) {
 }
 
 function initializeGame() {
+  let gamepad = document.querySelector(".gamepad");
+  if (!gamepad) {
+    gamepad = document.createElement("div");
+    gamepad.className = "gamepad";
+    document.body.appendChild(gamepad);
+  } else {
+    clearContainer(gamepad);
+  }
   createStartScreen();
-  //sample for initialize game
 }
 
 initializeGame();
