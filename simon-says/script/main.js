@@ -72,6 +72,32 @@ function createStartScreen(container) {
   buttonsContainer.className = "buttons";
   container.appendChild(buttonsContainer);
   createKeyboard(currentDifficultyLevel, buttonsContainer)
+
+  const startButton = document.createElement("button");
+  startButton.className = "levelOptionsButton";
+  startButton.textContent = "START";
+  container.appendChild(startButton);
+
+  const levelOptionsBlock = document.createElement("div");
+  levelOptionsBlock.className = "levelOptionsBlock";
+  container.appendChild(levelOptionsBlock);
+
+  const repeatButton = document.createElement("button");
+  repeatButton.className = "levelOptionsButton";
+  repeatButton.id = "repeat";
+  repeatButton.textContent = "Repeat the sequence".toUpperCase();
+  levelOptionsBlock.appendChild(repeatButton);
+
+  const nextButton = document.createElement("button");
+  nextButton.className = "levelOptionsButton";
+  nextButton.id = "next";
+  nextButton.textContent = "Next".toUpperCase();
+  levelOptionsBlock.appendChild(nextButton);
+  
+  const restartGame = document.createElement("button");
+  restartGame.className = "levelOptionsButton restartButton";
+  restartGame.textContent = "New Game".toUpperCase();
+  levelOptionsBlock.appendChild(restartGame);
 }
 
 function initializeGame() {
