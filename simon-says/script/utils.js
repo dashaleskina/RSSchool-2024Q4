@@ -1,3 +1,4 @@
+//sets of symbols for keyboard
 export const easyLevelSet = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 export const mediumLevelSet = [
   "Q",
@@ -29,6 +30,7 @@ export const mediumLevelSet = [
 ];
 export const hardLevelSet = easyLevelSet.concat(mediumLevelSet);
 
+// creating of sequence
 export function createSequence(difficultyLevel, round) {
   let setOfSymbols = [];
   if (difficultyLevel === "easy") {
