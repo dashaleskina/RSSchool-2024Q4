@@ -19,7 +19,48 @@ let errorsPerRound = 0;
 
 function createStartScreen(container) {
   clearContainer(container);
+  const gameOptionsBlock = document.createElement("div");
+  gameOptionsBlock.className = "gameOptionsBlock";
+  container.appendChild(gameOptionsBlock);
 
+  const difficultyLevels = document.createElement("div");
+  difficultyLevels.className = "difficultyLevels";
+  gameOptionsBlock.appendChild(difficultyLevels);
+
+  const difficultyLevelsText = document.createElement("div");
+  difficultyLevelsText.className = "difficultyLevelsText";
+  difficultyLevelsText.textContent =
+    `Chosen difficulty level: ${currentDifficultyLevel}`.toUpperCase();
+  difficultyLevels.appendChild(difficultyLevelsText);
+
+  const difficultyLevelsButtons = document.createElement("div");
+  difficultyLevelsButtons.className = "difficultyLevelsButtons";
+  difficultyLevels.appendChild(difficultyLevelsButtons);
+
+  const difficultyButtons = setsOfDiffuculties.map((level) => {
+    const button = document.createElement("button");
+    button.textContent = level;
+    button.className = "difficultyButton";
+    if (button.textContent === currentDifficultyLevel) {
+      button.classList.add("difficultyButtonActive");
+    }
+    difficultyLevelsButtons.appendChild(button);
+    return button;
+  });
+
+
+  const roundNumber = document.createElement("div");
+  roundNumber.className = "roundNumber";
+  roundNumber.textContent = "Your level:".toUpperCase();
+  gameOptionsBlock.appendChild(roundNumber);
+
+  const roundNumberScreen = document.createElement("div");
+  roundNumberScreen.className = "screen";
+  roundNumberScreen.textContent = currentRound;
+  roundNumberScreen.id = "roundNumberScreen";
+  roundNumber.appendChild(roundNumberScreen);
+
+  // Screen
   const inputScreen = document.createElement("input");
   inputScreen.className = "screen";
   inputScreen.id = "inputScreen";
