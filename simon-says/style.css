@@ -201,6 +201,13 @@ button:active {
   display: none;
 }
 
+.disabledButton {
+    background-color: rgb(152, 152, 152);
+    border-color: rgb(123, 122, 122);
+    color: rgb(100, 98, 98);
+    pointer-events: none;
+  }
+  
 .sequenceKeyboardButton {
   box-shadow: 0 0 13px 0 #e39644 inset, 0 0 13px 4px #e39644;
   border: none;

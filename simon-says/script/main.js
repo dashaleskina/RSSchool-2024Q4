@@ -21,6 +21,9 @@ let errorsPerRound = 0;
 let isPlayingSequence = false; //проигрывается ли сейчас последовательность
 let repeatUsed = false;
 
+let isInputEnabled = false;
+let isKeyProcessing = false;
+
 function createStartScreen(container) {
   clearContainer(container);
   const gameOptionsBlock = document.createElement("div");
@@ -115,6 +118,7 @@ function createStartScreen(container) {
       repeatUsed = true;
       inputScreen.value = "";
       userInput = [];
+      isInputEnabled = true;
     }
   });
 
@@ -132,6 +136,8 @@ function createStartScreen(container) {
   const informationBlock = document.createElement("div");
   informationBlock.className = "informationBlock";
   container.appendChild(informationBlock);
+
+  setupKeyboardListener();
 }
 
 function changeLevelDifficulty(selectedButton) {
@@ -156,12 +162,74 @@ function handleUserInput(button, inputScreen) {
   }, 300);
 
   updateInputScreen(button, inputScreen);
+
+  if (!checkUserInput()) {
+    handleErrors(inputScreen);
+    return;
+  }
+
+  if (userInput.length === currentSequence.length) {
+    handleCorrectSequence();
+  }
 }
 
 function updateInputScreen(button, inputScreen) {
   const value = button.textContent;
   userInput.push(value);
   inputScreen.value = userInput.join("");
+}
+
+function checkUserInput() {
+  const currentIndex = userInput.length - 1;
+  return userInput[currentIndex] === currentSequence[currentIndex];
+}
+
+function handleErrors(inputScreen) {
+  errorsPerRound++;
+  const errorInfoBlock = document.querySelector(".informationBlock");
+  const keyboardButtons = document.querySelectorAll(".buttons button");
+
+  keyboardButtons.forEach((btn) => (btn.disabled = true));
+  errorInfoBlock.style.display = "flex";
+  errorInfoBlock.classList.add("informationBlockMistake");
+
+  if (errorsPerRound > 1) {
+    errorInfoBlock.textContent =
+      "You've used two attempts. The game is over! Push 'New Game' if you want to try again.";
+    isInputEnabled = false;
+  } else {
+    errorInfoBlock.textContent =
+      "You made a mistake! There's only one chance left to win.";
+    userInput = [];
+    inputScreen.value = "";
+    isInputEnabled = false;
+  }
+}
+
+function handleCorrectSequence() {
+  const errorInfoBlock = document.querySelector(".informationBlock");
+  const nextButton = document.getElementById("next");
+  const repeatButton = document.getElementById("repeat");
+  const keyboardButtons = document.querySelectorAll(".buttons button");
+
+  setTimeout(() => {
+    if (currentRound === 5) {
+      repeatButton.classList.add("disabledButton");
+      errorInfoBlock.style.display = "flex";
+      errorInfoBlock.classList.add("informationBlockCorrect");
+      errorInfoBlock.textContent =
+        "You're win! Push 'New Game' if you want to try again.";
+      isInputEnabled = false;
+      return;
+    }
+    errorInfoBlock.style.display = "flex";
+    errorInfoBlock.classList.add("informationBlockCorrect");
+    errorInfoBlock.textContent = "Correct! Press 'NEXT' to continue.";
+    nextButton.style.display = "flex";
+    repeatButton.style.display = "none";
+    keyboardButtons.forEach((btn) => (btn.disabled = true));
+    isInputEnabled = false;
+  }, 100);
 }
 
 function displaySequenceOnKeyboard(sequence, container) {
@@ -210,6 +278,84 @@ function startGame(startButton, roundNumber) {
   currentSequence = createSequence(currentDifficultyLevel, currentRound);
   const buttonsContainer = document.querySelector(".buttons");
   displaySequenceOnKeyboard(currentSequence, buttonsContainer);
+}
+
+function setupKeyboardListener() {
+  const layoutMap = {
+    А: "F",
+    Б: ",",
+    В: "D",
+    Г: "U",
+    Д: "L",
+    Е: "T",
+    Ё: "T",
+    Ж: ";",
+    З: "P",
+    И: "B",
+    Й: "Q",
+    К: "R",
+    Л: "K",
+    М: "V",
+    Н: "Y",
+    О: "J",
+    П: "G",
+    Р: "H",
+    С: "C",
+    Т: "N",
+    У: "E",
+    Ф: "A",
+    Х: "[",
+    Ц: "W",
+    Ч: "X",
+    Ш: "I",
+    Щ: "O",
+    Ъ: "]",
+    Ы: "S",
+    Ь: "M",
+    Э: "'",
+    Ю: ".",
+    Я: "Z",
+  };
+  document.addEventListener("keydown", (event) => {
+    if (!isInputEnabled || isPlayingSequence || isKeyProcessing) return;
+
+    isKeyProcessing = true;
+
+    let keyPressed = event.key.toUpperCase();
+    if (layoutMap[keyPressed]) {
+      keyPressed = layoutMap[keyPressed];
+    }
+
+    const validSymbols =
+      currentDifficultyLevel === "easy"
+        ? easyLevelSet
+        : currentDifficultyLevel === "medium"
+        ? mediumLevelSet
+        : hardLevelSet;
+
+    if (!validSymbols.includes(keyPressed)) {
+      isKeyProcessing = false;
+      return;
+    }
+
+    const buttonsContainer = document.querySelector(".buttons");
+    const virtualButton = Array.from(buttonsContainer.children).find(
+      (btn) => btn.textContent === keyPressed
+    );
+
+    if (virtualButton) {
+      virtualButton.classList.add("sequenceKeyboardButton");
+      setTimeout(() => {
+        virtualButton.classList.remove("sequenceKeyboardButton");
+        isKeyProcessing = false;
+      }, 300);
+
+      const inputScreen = document.getElementById("inputScreen");
+      handleUserInput(virtualButton, inputScreen);
+    } else {
+      isKeyProcessing = false;
+    }
+  });
 }
 
 function initializeGame() {
