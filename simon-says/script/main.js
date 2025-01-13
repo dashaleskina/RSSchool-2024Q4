@@ -19,6 +19,7 @@ let userInput = [];
 let errorsPerRound = 0;
 
 let isPlayingSequence = false; //проигрывается ли сейчас последовательность
+let repeatUsed = false;
 
 function createStartScreen(container) {
   clearContainer(container);
@@ -110,6 +111,17 @@ function createStartScreen(container) {
   restartGame.className = "levelOptionsButton restartButton";
   restartGame.textContent = "New Game".toUpperCase();
   levelOptionsBlock.appendChild(restartGame);
+
+  repeatButton.addEventListener("click", () => {
+    if (!repeatUsed) {
+      displaySequenceOnKeyboard(currentSequence, buttonsContainer);
+      repeatButton.disabled = true;
+      repeatButton.classList.add("disabledButton");
+      repeatUsed = true;
+      inputScreen.value = "";
+      userInput = [];
+    }
+  });
 }
 
 function changeLevelDifficulty(selectedButton) {
@@ -131,11 +143,14 @@ function displaySequenceOnKeyboard(sequence, container) {
   buttons.forEach((btn) => (btn.disabled = true));
   optionsButtons.forEach((btn) => (btn.disabled = true));
 
+  isPlayingSequence = true;
+
   const interval = setInterval(() => {
     if (index >= sequence.length) {
       clearInterval(interval);
       buttons.forEach((btn) => (btn.disabled = false));
       optionsButtons.forEach((btn) => (btn.disabled = false));
+      isPlayingSequence = false;
       return;
     }
 
