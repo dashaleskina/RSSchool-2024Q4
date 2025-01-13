@@ -18,6 +18,8 @@ let currentSequence = [];
 let userInput = [];
 let errorsPerRound = 0;
 
+let isPlayingSequence = false; //проигрывается ли сейчас последовательность
+
 function createStartScreen(container) {
   clearContainer(container);
   const gameOptionsBlock = document.createElement("div");
@@ -84,6 +86,10 @@ function createStartScreen(container) {
   startButton.textContent = "START";
   container.appendChild(startButton);
 
+  startButton.addEventListener("click", () => {
+    startGame(startButton, roundNumber);
+  });
+
   const levelOptionsBlock = document.createElement("div");
   levelOptionsBlock.className = "levelOptionsBlock";
   container.appendChild(levelOptionsBlock);
@@ -116,6 +122,51 @@ function changeLevelDifficulty(selectedButton) {
   createKeyboard(currentDifficultyLevel, buttonsContainer);
   difficultyLevelText.textContent =
     `Chosen difficulty level: ${currentDifficultyLevel}`.toUpperCase();
+}
+
+function displaySequenceOnKeyboard(sequence, container) {
+  let index = 0;
+  const buttons = container.querySelectorAll("button");
+  const optionsButtons = document.querySelectorAll(".levelOptionsBlock button");
+  buttons.forEach((btn) => (btn.disabled = true));
+  optionsButtons.forEach((btn) => (btn.disabled = true));
+
+  const interval = setInterval(() => {
+    if (index >= sequence.length) {
+      clearInterval(interval);
+      buttons.forEach((btn) => (btn.disabled = false));
+      optionsButtons.forEach((btn) => (btn.disabled = false));
+      return;
+    }
+
+    const symbol = sequence[index];
+    const button = Array.from(container.children).find(
+      (btn) => btn.textContent === symbol
+    );
+
+    if (button) {
+      button.classList.add("sequenceKeyboardButton");
+      setTimeout(() => button.classList.remove("sequenceKeyboardButton"), 500);
+    }
+
+    index++;
+  }, 800);
+}
+
+function startGame(startButton, roundNumber) {
+  startButton.style.display = "none";
+  roundNumber.style.display = "flex";
+  document.querySelector(".levelOptionsBlock").style.display = "flex";
+  document.querySelector(".difficultyLevels").style.width = "65%";
+
+  document.querySelectorAll(".difficultyButton").forEach((button) => {
+    button.disabled = true;
+    button.classList.add("disabledButton");
+  });
+
+  currentSequence = createSequence(currentDifficultyLevel, currentRound);
+  const buttonsContainer = document.querySelector(".buttons");
+  displaySequenceOnKeyboard(currentSequence, buttonsContainer);
 }
 
 function initializeGame() {
