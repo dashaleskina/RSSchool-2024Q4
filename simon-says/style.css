@@ -16,6 +16,8 @@ body {
 }
 
 .gamepad {
+  max-width: 1000px;
+  min-width: 350px;
   background-color: #e3deda;
   padding: 20px;
   margin: 20px;
@@ -213,4 +215,48 @@ button:active {
 .sequenceKeyboardButton {
   box-shadow: 0 0 13px 0 #e39644 inset, 0 0 13px 4px #e39644;
   border: none;
+}
+
+@media (max-width: 768px) {
+  .buttons {
+    max-width: 600px;
+  }
+  button {
+    height: 40px;
+    width: 40px;
+  }
+  .difficultyLevelsText,
+  .roundNumber {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  .difficultyButton {
+    font-size: 15px;
+  }
+  #roundNumberScreen {
+    width: 50px;
+    height: 50px;
+  }
+  .screen {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 490px) {
+  .buttons button {
+    max-width: 22px;
+    max-height: 35px;
+    border-width: 3px;
+  }
+
+  .difficultyLevelsText,
+  .roundNumber {
+    font-size: 13px;
+  }
+  .levelOptionsButton {
+    min-height: 50px;
+    font-size: 18px;
+  }
 }
