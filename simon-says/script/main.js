@@ -82,6 +82,12 @@ function createStartScreen(container) {
   container.appendChild(buttonsContainer);
   createKeyboard(currentDifficultyLevel, buttonsContainer);
 
+  buttonsContainer.addEventListener("click", (event) => {
+    if (event.target.tagName === "BUTTON" && !isPlayingSequence) {
+      handleUserInput(event.target, inputScreen);
+    }
+  });
+
   const startButton = document.createElement("button");
   startButton.className = "levelOptionsButton";
   startButton.textContent = "START";
@@ -101,6 +107,17 @@ function createStartScreen(container) {
   repeatButton.textContent = "Repeat the sequence".toUpperCase();
   levelOptionsBlock.appendChild(repeatButton);
 
+  repeatButton.addEventListener("click", () => {
+    if (!repeatUsed) {
+      displaySequenceOnKeyboard(currentSequence, buttonsContainer);
+      repeatButton.disabled = true;
+      repeatButton.classList.add("disabledButton");
+      repeatUsed = true;
+      inputScreen.value = "";
+      userInput = [];
+    }
+  });
+
   const nextButton = document.createElement("button");
   nextButton.className = "levelOptionsButton";
   nextButton.id = "next";
@@ -112,16 +129,9 @@ function createStartScreen(container) {
   restartGame.textContent = "New Game".toUpperCase();
   levelOptionsBlock.appendChild(restartGame);
 
-  repeatButton.addEventListener("click", () => {
-    if (!repeatUsed) {
-      displaySequenceOnKeyboard(currentSequence, buttonsContainer);
-      repeatButton.disabled = true;
-      repeatButton.classList.add("disabledButton");
-      repeatUsed = true;
-      inputScreen.value = "";
-      userInput = [];
-    }
-  });
+  const informationBlock = document.createElement("div");
+  informationBlock.className = "informationBlock";
+  container.appendChild(informationBlock);
 }
 
 function changeLevelDifficulty(selectedButton) {
@@ -134,6 +144,24 @@ function changeLevelDifficulty(selectedButton) {
   createKeyboard(currentDifficultyLevel, buttonsContainer);
   difficultyLevelText.textContent =
     `Chosen difficulty level: ${currentDifficultyLevel}`.toUpperCase();
+}
+
+function handleUserInput(button, inputScreen) {
+  if (isPlayingSequence) return;
+
+  button.classList.add("sequenceKeyboardButton");
+
+  setTimeout(() => {
+    button.classList.remove("sequenceKeyboardButton");
+  }, 300);
+
+  updateInputScreen(button, inputScreen);
+}
+
+function updateInputScreen(button, inputScreen) {
+  const value = button.textContent;
+  userInput.push(value);
+  inputScreen.value = userInput.join("");
 }
 
 function displaySequenceOnKeyboard(sequence, container) {
