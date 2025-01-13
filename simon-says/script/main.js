@@ -5,7 +5,7 @@ import {
   hardLevelSet,
   createSequence,
   clearContainer,
-  createKeyboard
+  createKeyboard,
 } from "./utils.js";
 
 // Global Variables
@@ -49,6 +49,12 @@ function createStartScreen(container) {
     return button;
   });
 
+  difficultyButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      changeLevelDifficulty(button);
+    });
+  });
+
   const roundNumber = document.createElement("div");
   roundNumber.className = "roundNumber";
   roundNumber.textContent = "Your level:".toUpperCase();
@@ -71,7 +77,7 @@ function createStartScreen(container) {
   const buttonsContainer = document.createElement("div");
   buttonsContainer.className = "buttons";
   container.appendChild(buttonsContainer);
-  createKeyboard(currentDifficultyLevel, buttonsContainer)
+  createKeyboard(currentDifficultyLevel, buttonsContainer);
 
   const startButton = document.createElement("button");
   startButton.className = "levelOptionsButton";
@@ -93,11 +99,23 @@ function createStartScreen(container) {
   nextButton.id = "next";
   nextButton.textContent = "Next".toUpperCase();
   levelOptionsBlock.appendChild(nextButton);
-  
+
   const restartGame = document.createElement("button");
   restartGame.className = "levelOptionsButton restartButton";
   restartGame.textContent = "New Game".toUpperCase();
   levelOptionsBlock.appendChild(restartGame);
+}
+
+function changeLevelDifficulty(selectedButton) {
+  const difficultyLevelText = document.querySelector(".difficultyLevelsText");
+  const buttons = document.querySelectorAll(".difficultyButton");
+  buttons.forEach((btn) => btn.classList.remove("difficultyButtonActive"));
+  selectedButton.classList.add("difficultyButtonActive");
+  currentDifficultyLevel = selectedButton.textContent;
+  const buttonsContainer = document.querySelector(".buttons");
+  createKeyboard(currentDifficultyLevel, buttonsContainer);
+  difficultyLevelText.textContent =
+    `Chosen difficulty level: ${currentDifficultyLevel}`.toUpperCase();
 }
 
 function initializeGame() {

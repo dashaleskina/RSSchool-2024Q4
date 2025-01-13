@@ -67,6 +67,13 @@ body {
   align-items: center;
 }
 
+.difficultyButtonActive {
+    border-color: #e4d8ca;
+    background-color: rgb(255, 255, 255);
+    color: #b14f1e;
+    box-shadow: 0 2px 0px rgba(0, 0, 0, 0.5);
+  }
+
 .roundNumber {
   width: 50%;
   display: none;
