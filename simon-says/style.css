@@ -67,12 +67,16 @@ body {
   align-items: center;
 }
 
-.difficultyButtonActive {
+.difficultyButton:hover {
     border-color: #e4d8ca;
-    background-color: rgb(255, 255, 255);
-    color: #b14f1e;
-    box-shadow: 0 2px 0px rgba(0, 0, 0, 0.5);
   }
+
+.difficultyButtonActive {
+  border-color: #e4d8ca;
+  background-color: rgb(255, 255, 255);
+  color: #b14f1e;
+  box-shadow: 0 2px 0px rgba(0, 0, 0, 0.5);
+}
 
 .roundNumber {
   width: 50%;
@@ -133,6 +137,16 @@ button {
   margin: 4px;
 }
 
+button:hover {
+  border-color: #e39644;
+}
+
+button:active {
+  top: 3px;
+  box-shadow: 0 2px 0px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s;
+}
+
 .levelOptionsBlock {
   width: 100%;
   display: flex;
@@ -150,6 +164,11 @@ button {
   justify-content: center;
   align-items: center;
 }
+
+.levelOptionsButton:hover:not(:last-child) {
+    border-color: #fff;
+    background-color: #e39644;
+  }
 
 .restartButton {
   border-radius: 50%;
