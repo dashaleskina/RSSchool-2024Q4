@@ -86,7 +86,8 @@ function createStartScreen(container) {
   createKeyboard(currentDifficultyLevel, buttonsContainer);
 
   buttonsContainer.addEventListener("click", (event) => {
-    if (event.target.tagName === "BUTTON" && !isPlayingSequence) {
+    if (event.target.tagName === "BUTTON" && !isPlayingSequence &&
+      isInputEnabled) {
       handleUserInput(event.target, inputScreen);
     }
   });
@@ -116,6 +117,7 @@ function createStartScreen(container) {
       repeatButton.disabled = true;
       repeatButton.classList.add("disabledButton");
       repeatUsed = true;
+      informationBlock.style.display = "none";
       inputScreen.value = "";
       userInput = [];
       isInputEnabled = true;
@@ -132,6 +134,8 @@ function createStartScreen(container) {
   restartGame.className = "levelOptionsButton restartButton";
   restartGame.textContent = "New Game".toUpperCase();
   levelOptionsBlock.appendChild(restartGame);
+
+  restartGame.addEventListener("click", resetGame);
 
   const informationBlock = document.createElement("div");
   informationBlock.className = "informationBlock";
@@ -155,11 +159,11 @@ function changeLevelDifficulty(selectedButton) {
 function handleUserInput(button, inputScreen) {
   if (isPlayingSequence) return;
 
-  button.classList.add("sequenceKeyboardButton");
+   button.classList.add("sequenceKeyboardButton");
 
-  setTimeout(() => {
-    button.classList.remove("sequenceKeyboardButton");
-  }, 300);
+   setTimeout(() => {
+     button.classList.remove("sequenceKeyboardButton");
+   }, 300);
 
   updateInputScreen(button, inputScreen);
 
@@ -278,6 +282,7 @@ function startGame(startButton, roundNumber) {
   currentSequence = createSequence(currentDifficultyLevel, currentRound);
   const buttonsContainer = document.querySelector(".buttons");
   displaySequenceOnKeyboard(currentSequence, buttonsContainer);
+  isInputEnabled = true;
 }
 
 function setupKeyboardListener() {
@@ -356,6 +361,15 @@ function setupKeyboardListener() {
       isKeyProcessing = false;
     }
   });
+}
+
+function resetGame() {
+  currentRound = 1;
+  userInput = [];
+  errorsPerRound = 0;
+  repeatUsed = false;
+  isPlayingSequence = false;
+  initializeGame();
 }
 
 function initializeGame() {
