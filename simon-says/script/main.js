@@ -130,6 +130,29 @@ function createStartScreen(container) {
   nextButton.textContent = "Next".toUpperCase();
   levelOptionsBlock.appendChild(nextButton);
 
+  nextButton.addEventListener("click", () => {
+    if (userInput.join("") === currentSequence.join("")) {
+      currentRound++;
+      document.getElementById("roundNumberScreen").textContent = currentRound;
+      userInput = [];
+      errorsPerRound = 0;
+      repeatUsed = false;
+      isInputEnabled = true;
+
+      repeatButton.disabled = false;
+      repeatButton.style.display = "flex";
+      repeatButton.classList.remove("disabledButton");
+      nextButton.style.display = "none";
+      inputScreen.value = "";
+      informationBlock.style.display = "none";
+      informationBlock.classList.remove("informationBlockCorrect");
+      currentSequence = createSequence(currentDifficultyLevel, currentRound);
+      const buttonsContainer = document.querySelector(".buttons");
+      displaySequenceOnKeyboard(currentSequence, buttonsContainer);
+      isInputEnabled = true;
+    }
+  });
+
   const restartGame = document.createElement("button");
   restartGame.className = "levelOptionsButton restartButton";
   restartGame.textContent = "New Game".toUpperCase();
