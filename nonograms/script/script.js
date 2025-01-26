@@ -1,3 +1,6 @@
+//imports
+import { schemes } from "./schemes.js";
+
 function createStartScreen(container, difficulty) {
   //тут будет логика вставки элементов в контейнер геймпада
 }
