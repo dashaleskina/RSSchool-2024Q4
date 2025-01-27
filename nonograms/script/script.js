@@ -23,6 +23,13 @@ function createFieldSize(difficulty, field) {
 
     cell.style.width = `${sizeOfCell}px`;
     cell.style.height = `${sizeOfCell}px`;
+
+    if ((i + 1) % 5 === 0) {
+      cell.classList.add("cellBorderRow");
+    }
+    if (Math.floor(i / sizeOfField) % 5 === 4) {
+      cell.classList.add("cellBorderColumn");
+    }
     field.appendChild(cell);
   }
 

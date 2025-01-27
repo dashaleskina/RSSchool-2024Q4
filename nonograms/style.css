@@ -36,3 +36,11 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.cellBorderRow {
+  border-right: 3px solid black;
+}
+
+.cellBorderColumn {
+  border-bottom: 3px solid black;
+}
