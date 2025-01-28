@@ -58,3 +58,7 @@ export function setHorizontalHints(schema) {
   }
   return repeatArrays;
 }
+
+export function setCountOfBlocksInHintsField(difficulty) {
+  return difficulty === "hard" ? 8 : difficulty === "medium" ? 5 : 3;
+}

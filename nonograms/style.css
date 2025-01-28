@@ -37,10 +37,35 @@ body {
   align-items: center;
 }
 
+.hintCell {
+  border: 1px solid gray;
+}
+
 .cellBorderRow {
   border-right: 3px solid black;
 }
 
 .cellBorderColumn {
   border-bottom: 3px solid black;
+}
+
+
+
+.leftHintsField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.topHintsField {
+  display: flex;
+}
+
+.bottomLevelOfField,
+.topLevelOfField {
+  display: flex;
+}
+
+.topLevelOfField {
+  align-self: flex-end;
 }
