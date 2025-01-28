@@ -1,3 +1,5 @@
+export const schemesNames = ['chicken', 'tetris', 'fountain', 'clock', 'rabbit', 'insect', 'pumpkin', 'snail', 'camera man', 'duck', 'lion'];
+
 export const schemes = [
   [
     //chicken

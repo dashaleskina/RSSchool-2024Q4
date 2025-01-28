@@ -1,5 +1,5 @@
 //imports
-import { schemes } from "./schemes.js";
+import { schemes, schemesNames } from "./schemes.js";
 import {
   setSizeOfField,
   setSizeOfCell,
@@ -9,6 +9,11 @@ import {
 } from "./options.js";
 
 //variables
+let selectedText;
+let chosenDifficulty = "easy";
+let lengthOfFirstLine;
+let indexOfSchema = 0;
+
 const nonogramField = document.createElement("div");
 nonogramField.className = "nonogramField";
 
@@ -28,18 +33,27 @@ const menu = document.createElement("div");
 menu.classList = "menu";
 topLevelOfField.appendChild(menu);
 
-function createStartScreen(container, difficulty) {
-  topLevelOfField.appendChild(createTopHintsField(difficulty));
+const select = document.createElement("select");
+schemesNames.forEach((optionText) => {
+  const option = document.createElement("option");
+  option.value = optionText;
+  option.textContent = optionText;
+  select.appendChild(option);
+});
+menu.appendChild(select);
+
+function createStartScreen(container, difficulty, number) {
+  topLevelOfField.appendChild(createTopHintsField(difficulty, number));
 
   container.appendChild(topLevelOfField);
 
-  bottomLevelOfField.appendChild(createLeftHintsField(difficulty));
+  bottomLevelOfField.appendChild(createLeftHintsField(difficulty, number));
   bottomLevelOfField.appendChild(createFieldSize(difficulty, nonogramField)); //само поле
   container.appendChild(bottomLevelOfField);
 }
 
-function createLeftHintsField(difficulty) {
-  const leftHintsArray = setVerticalHints(schemes[2]);
+function createLeftHintsField(difficulty, number) {
+  const leftHintsArray = setVerticalHints(schemes[number]);
   return createHintsField(
     leftHintsArray,
     difficulty,
@@ -47,8 +61,8 @@ function createLeftHintsField(difficulty) {
     leftHintsField
   );
 }
-function createTopHintsField(difficulty) {
-  const topHintsArray = setHorizontalHints(schemes[2]);
+function createTopHintsField(difficulty, number) {
+  const topHintsArray = setHorizontalHints(schemes[number]);
   return createHintsField(
     topHintsArray,
     difficulty,
@@ -108,8 +122,8 @@ function createHintsField(hintsArray, difficulty, orientation, container) {
       lineContainer.appendChild(cell);
     }
 
-    menu.style.width = `${sizeOfCell * countOfBlocks}px`
-    menu.style.height = `${sizeOfCell * countOfBlocks}px`
+    menu.style.width = `${sizeOfCell * countOfBlocks}px`;
+    menu.style.height = `${sizeOfCell * countOfBlocks}px`;
 
     container.appendChild(lineContainer);
   }
@@ -143,17 +157,17 @@ function createFieldSize(difficulty, field) {
   return field;
 }
 
-function initGame() {
+function initGame(difficulty, number) {
   let gamepad = document.querySelector(".gamepad");
   if (!gamepad) {
     gamepad = document.createElement("div");
     gamepad.className = "gamepad";
     document.body.appendChild(gamepad);
   }
-  createStartScreen(gamepad, "easy");
+  createStartScreen(gamepad, difficulty, number);
 }
 
-initGame();
+initGame(chosenDifficulty, indexOfSchema);
 
 //listeners
 const cellsArray = document.querySelectorAll(".nonogramField .cell"); //псевдомассив с ячейками на поле для отработки событий
@@ -176,4 +190,19 @@ cellsArray.forEach((cell) => {
       cell.classList.add("crossCell");
     }
   });
+});
+
+select.addEventListener("change", () => {
+  selectedText = select.options[select.selectedIndex].text;
+  lengthOfFirstLine = schemes[select.selectedIndex][0].length;
+  chosenDifficulty =
+    lengthOfFirstLine === 5
+      ? "easy"
+      : lengthOfFirstLine === 10
+      ? "medium"
+      : lengthOfFirstLine === 15
+      ? "hard"
+      : chosenDifficulty;
+  console.log(lengthOfFirstLine, chosenDifficulty);
+  initGame(chosenDifficulty, select.selectedIndex);
 });
