@@ -34,6 +34,7 @@ menu.classList = "menu";
 topLevelOfField.appendChild(menu);
 
 const select = document.createElement("select");
+select.classList = 'select';
 schemesNames.forEach((optionText) => {
   const option = document.createElement("option");
   option.value = optionText;
@@ -41,6 +42,11 @@ schemesNames.forEach((optionText) => {
   select.appendChild(option);
 });
 menu.appendChild(select);
+
+const resetButton = document.createElement("button");
+resetButton.classList = "resetButton";
+resetButton.textContent = 'Reset'
+menu.appendChild(resetButton)
 
 function createStartScreen(container, difficulty, number) {
   topLevelOfField.appendChild(createTopHintsField(difficulty, number));
@@ -206,3 +212,9 @@ select.addEventListener("change", () => {
   console.log(lengthOfFirstLine, chosenDifficulty);
   initGame(chosenDifficulty, select.selectedIndex);
 });
+
+resetButton.addEventListener('click', () => {
+    cellsArray.forEach((cell) => {
+        cell.classList.remove('shadedCell', 'crossCell')
+    })
+})

@@ -30,8 +30,22 @@ body {
 
 .menu {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;  
+    align-items: center;
     background-color: aquamarine;
     outline: 1px solid black;
+    padding: 10px;
+}
+
+.select {
+    height: 20px;
+    width: 120px;
+}
+
+.resetButton {
+    height: 20px;
+    width: 120px;
 }
 
 .cell {
