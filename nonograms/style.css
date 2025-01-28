@@ -41,6 +41,16 @@ body {
   border: 1px solid gray;
 }
 
+.shadedCell {
+  background-color: black;
+}
+
+.crossCell {
+  background-image: url("/nonograms/images/cross.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .cellBorderRow {
   border-right: 3px solid black;
 }
@@ -48,8 +58,6 @@ body {
 .cellBorderColumn {
   border-bottom: 3px solid black;
 }
-
-
 
 .leftHintsField {
   display: flex;

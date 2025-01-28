@@ -147,3 +147,26 @@ function initGame() {
 }
 
 initGame();
+
+//listeners
+const cellsArray = document.querySelectorAll(".nonogramField .cell"); //псевдомассив с ячейками на поле для отработки событий
+cellsArray.forEach((cell) => {
+  cell.addEventListener("click", () => {
+    if (cell.classList.contains("shadedCell")) {
+      cell.classList.remove("shadedCell");
+    } else {
+      cell.classList.remove("crossCell");
+      cell.classList.add("shadedCell");
+    }
+  });
+
+  cell.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    if (cell.classList.contains("crossCell")) {
+      cell.classList.remove("crossCell");
+    } else {
+      cell.classList.remove("shadedCell");
+      cell.classList.add("crossCell");
+    }
+  });
+});
