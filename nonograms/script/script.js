@@ -24,6 +24,10 @@ topLevelOfField.className = "topLevelOfField";
 const bottomLevelOfField = document.createElement("div");
 bottomLevelOfField.className = "bottomLevelOfField";
 
+const menu = document.createElement("div");
+menu.classList = "menu";
+topLevelOfField.appendChild(menu);
+
 function createStartScreen(container, difficulty) {
   topLevelOfField.appendChild(createTopHintsField(difficulty));
 
@@ -103,6 +107,9 @@ function createHintsField(hintsArray, difficulty, orientation, container) {
 
       lineContainer.appendChild(cell);
     }
+
+    menu.style.width = `${sizeOfCell * countOfBlocks}px`
+    menu.style.height = `${sizeOfCell * countOfBlocks}px`
 
     container.appendChild(lineContainer);
   }

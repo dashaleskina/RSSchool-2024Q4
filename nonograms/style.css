@@ -28,6 +28,12 @@ body {
   flex-wrap: wrap;
 }
 
+.menu {
+    display: flex;
+    background-color: aquamarine;
+    outline: 1px solid black;
+}
+
 .cell {
   display: flex;
   width: 50px;
