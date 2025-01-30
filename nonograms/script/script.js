@@ -248,7 +248,8 @@ select.addEventListener("change", () => {
   flatArrayForCheck = flatArray.map((item) => {
     return item === 1 ? 0 : item;
   });
-  infoMessage.style.display = "none"
+  infoMessage.style.display = "none";
+  resetButton.disabled = false;
   initGame(chosenDifficulty, select.selectedIndex);
 });
 
