@@ -54,7 +54,7 @@ resetButton.textContent = "Reset";
 menu.appendChild(resetButton);
 
 const footerBlock = document.createElement("div");
-footerBlock.classList = "footerBlock"
+footerBlock.classList = "footerBlock";
 
 const infoMessage = document.createElement("div");
 infoMessage.classList = "infoMessage";
@@ -182,13 +182,16 @@ function createFieldSize(difficulty, field) {
 // function startGame(indexOfSchema) {
 // }
 
-function checkSchemaAnswer(index) {
-  flatArrayForCheck[index] = 1;
+function checkSchemaAnswer(index, value) {
+if (value !== null) {
+    flatArrayForCheck[index] = value; // Обновляем массив только если передано значение
+  }
+
   if (JSON.stringify(flatArrayForCheck) === JSON.stringify(flatArray)) {
     infoMessage.style.display = "flex";
     resetButton.disabled = true;
   } else {
-    console.log("continue");
+    console.log("continue", flatArray, flatArrayForCheck);
   }
 }
 
@@ -212,10 +215,11 @@ function addCellEventListeners() {
     cell.addEventListener("click", () => {
       if (cell.classList.contains("shadedCell")) {
         cell.classList.remove("shadedCell");
+        checkSchemaAnswer(index, 0);
       } else {
         cell.classList.remove("crossCell");
         cell.classList.add("shadedCell");
-        checkSchemaAnswer(index);
+        checkSchemaAnswer(index, 1);
       }
     });
 
@@ -223,9 +227,11 @@ function addCellEventListeners() {
       e.preventDefault();
       if (cell.classList.contains("crossCell")) {
         cell.classList.remove("crossCell");
+        checkSchemaAnswer(index, null)
       } else {
         cell.classList.remove("shadedCell");
         cell.classList.add("crossCell");
+        checkSchemaAnswer(index, 0);
       }
     });
   });
