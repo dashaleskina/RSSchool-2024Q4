@@ -184,7 +184,7 @@ function createFieldSize(difficulty, field) {
 
 function checkSchemaAnswer(index, value) {
   if (value !== null) {
-    flatArrayForCheck[index] = value; // Обновляем массив только если передано значение
+    flatArrayForCheck[index] = value;
   }
 
   if (JSON.stringify(flatArrayForCheck) === JSON.stringify(flatArray)) {
