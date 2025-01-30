@@ -196,6 +196,11 @@ function checkSchemaAnswer(index, value) {
   if (JSON.stringify(flatArrayForCheck) === JSON.stringify(flatArray)) {
     infoMessage.style.display = "flex";
     showSolutionButton.disabled = true;
+
+    const cellsArray = document.querySelectorAll(".nonogramField .cell");
+    cellsArray.forEach((cell) => {
+      cell.classList.add("disabledCell");
+    });
   } else {
     console.log("continue", flatArray, flatArrayForCheck);
   }
@@ -236,10 +241,14 @@ function showSolution () {
         if (value === 1) {
             cellsArray[index].classList.add("shadedCell")
             showSolutionButton.disabled = true;
+
         } else {
             cellsArray[index].classList.remove("shadedCell")
         }
     })
+    cellsArray.forEach((cell) => {
+        cell.classList.add("disabledCell");
+      });
 }
 
 
@@ -291,12 +300,14 @@ showSolutionButton.addEventListener("click", showSolution);
 resetButton.addEventListener("click", () => {
   const cellsArray = document.querySelectorAll(".nonogramField .cell");
   cellsArray.forEach((cell) => {
-    cell.classList.remove("shadedCell", "crossCell");
+    cell.classList.remove("shadedCell", "crossCell", "disabledCell");
   });
   flatArrayForCheck = flatArray.map((item) => {
     return item === 1 ? 0 : item;
   });
-  showSolution.disabled = false
+  showSolutionButton.disabled = false;
+  infoMessage.style.display = "none";
+
 });
 
 initGame(chosenDifficulty, indexOfSchema);
