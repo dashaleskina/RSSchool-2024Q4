@@ -52,6 +52,11 @@ randomGameButton.classList = "randomGameButton";
 randomGameButton.textContent = "Random game";
 menu.appendChild(randomGameButton);
 
+const showSolutionButton = document.createElement("button");
+showSolutionButton.classList = "showSolutionButton";
+showSolutionButton.textContent = "Show solution";
+menu.appendChild(showSolutionButton);
+
 const resetButton = document.createElement("button");
 resetButton.classList = "resetButton";
 resetButton.textContent = "Reset";
@@ -86,6 +91,7 @@ function createLeftHintsField(difficulty, number) {
     leftHintsField
   );
 }
+
 function createTopHintsField(difficulty, number) {
   const topHintsArray = setHorizontalHints(schemes[number]);
   return createHintsField(
@@ -189,7 +195,7 @@ function checkSchemaAnswer(index, value) {
 
   if (JSON.stringify(flatArrayForCheck) === JSON.stringify(flatArray)) {
     infoMessage.style.display = "flex";
-    resetButton.disabled = true;
+    showSolutionButton.disabled = true;
   } else {
     console.log("continue", flatArray, flatArrayForCheck);
   }
@@ -207,8 +213,6 @@ function changeSchema() {
       ? "hard"
       : chosenDifficulty;
 
-  console.log(lengthOfFirstLine, chosenDifficulty);
-
   flatArray = schemes[select.selectedIndex].flat();
   flatArrayForCheck = flatArray.map((item) => {
     return item === 1 ? 0 : item;
@@ -216,6 +220,7 @@ function changeSchema() {
 
   infoMessage.style.display = "none";
   resetButton.disabled = false;
+  showSolutionButton.disabled = false;
   initGame(chosenDifficulty, select.selectedIndex);
 }
 
@@ -225,6 +230,19 @@ function randomGame () {
     changeSchema();
 }
 
+function showSolution () {
+    const cellsArray = document.querySelectorAll(".nonogramField .cell");
+    flatArray.forEach((value, index) => {
+        if (value === 1) {
+            cellsArray[index].classList.add("shadedCell")
+            showSolutionButton.disabled = true;
+        } else {
+            cellsArray[index].classList.remove("shadedCell")
+        }
+    })
+}
+
+
 function initGame(difficulty, number) {
   let gamepad = document.querySelector(".gamepad");
   if (!gamepad) {
@@ -233,7 +251,6 @@ function initGame(difficulty, number) {
     document.body.appendChild(gamepad);
   }
   createStartScreen(gamepad, difficulty, number);
-
   addCellEventListeners();
 }
 
@@ -270,17 +287,16 @@ function addCellEventListeners() {
 // выбор схемы
 select.addEventListener("change", changeSchema);
 randomGameButton.addEventListener("click", randomGame);
-
-
-// сброс игры
+showSolutionButton.addEventListener("click", showSolution);
 resetButton.addEventListener("click", () => {
-  const cellsArray = document.querySelectorAll(".nonogramField .cell"); // Обновляем массив ячеек
+  const cellsArray = document.querySelectorAll(".nonogramField .cell");
   cellsArray.forEach((cell) => {
     cell.classList.remove("shadedCell", "crossCell");
   });
   flatArrayForCheck = flatArray.map((item) => {
     return item === 1 ? 0 : item;
   });
+  showSolution.disabled = false
 });
 
 initGame(chosenDifficulty, indexOfSchema);

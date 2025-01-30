@@ -52,6 +52,11 @@ body {
     width: 120px;
 }
 
+.showSolutionButton {
+    height: 20px;
+    width: 120px;
+}
+
 .cell {
   display: flex;
   width: 50px;
