@@ -1,4 +1,4 @@
-export const schemesNames = ['chicken', 'tetris', 'fountain', 'clock', 'rabbit', 'insect', 'pumpkin', 'snail', 'camera man', 'duck', 'lion'];
+export const schemesNames = ['chicken 5x5', 'tetris 5x5', 'fountain 5x5', 'clock 5x5', 'rabbit 5x5', 'insect 10x10', 'pumpkin 15x15', 'snail 15x15', 'camera man 15x15', 'duck 15x15', 'lion 15x15'];
 
 export const schemes = [
   [
