@@ -47,6 +47,11 @@ body {
     width: 120px;
 }
 
+.randomGameButton {
+    height: 20px;
+    width: 120px;
+}
+
 .cell {
   display: flex;
   width: 50px;

@@ -13,7 +13,6 @@ let selectedText;
 let chosenDifficulty = "easy";
 let lengthOfFirstLine;
 let indexOfSchema = 0;
-let gameStarted = false;
 let flatArray = schemes[0].flat();
 let flatArrayForCheck = flatArray.map((item) => {
   return item === 1 ? 0 : item;
@@ -47,6 +46,11 @@ schemesNames.forEach((optionText) => {
   select.appendChild(option);
 });
 menu.appendChild(select);
+
+const randomGameButton = document.createElement("button");
+randomGameButton.classList = "randomGameButton";
+randomGameButton.textContent = "Random game";
+menu.appendChild(randomGameButton);
 
 const resetButton = document.createElement("button");
 resetButton.classList = "resetButton";
@@ -178,12 +182,8 @@ function createFieldSize(difficulty, field) {
   return field;
 }
 
-//переделать под таймер
-// function startGame(indexOfSchema) {
-// }
-
 function checkSchemaAnswer(index, value) {
-if (value !== null) {
+  if (value !== null) {
     flatArrayForCheck[index] = value; // Обновляем массив только если передано значение
   }
 
@@ -193,6 +193,36 @@ if (value !== null) {
   } else {
     console.log("continue", flatArray, flatArrayForCheck);
   }
+}
+
+function changeSchema() {
+  selectedText = select.options[select.selectedIndex].text;
+  lengthOfFirstLine = schemes[select.selectedIndex][0].length;
+  chosenDifficulty =
+    lengthOfFirstLine === 5
+      ? "easy"
+      : lengthOfFirstLine === 10
+      ? "medium"
+      : lengthOfFirstLine === 15
+      ? "hard"
+      : chosenDifficulty;
+
+  console.log(lengthOfFirstLine, chosenDifficulty);
+
+  flatArray = schemes[select.selectedIndex].flat();
+  flatArrayForCheck = flatArray.map((item) => {
+    return item === 1 ? 0 : item;
+  });
+
+  infoMessage.style.display = "none";
+  resetButton.disabled = false;
+  initGame(chosenDifficulty, select.selectedIndex);
+}
+
+function randomGame () {
+    const randomIndex = Math.floor(Math.random() * schemes.length);
+    select.selectedIndex = randomIndex;
+    changeSchema();
 }
 
 function initGame(difficulty, number) {
@@ -227,7 +257,7 @@ function addCellEventListeners() {
       e.preventDefault();
       if (cell.classList.contains("crossCell")) {
         cell.classList.remove("crossCell");
-        checkSchemaAnswer(index, null)
+        checkSchemaAnswer(index, null);
       } else {
         cell.classList.remove("shadedCell");
         cell.classList.add("crossCell");
@@ -238,26 +268,9 @@ function addCellEventListeners() {
 }
 
 // выбор схемы
-select.addEventListener("change", () => {
-  selectedText = select.options[select.selectedIndex].text;
-  lengthOfFirstLine = schemes[select.selectedIndex][0].length;
-  chosenDifficulty =
-    lengthOfFirstLine === 5
-      ? "easy"
-      : lengthOfFirstLine === 10
-      ? "medium"
-      : lengthOfFirstLine === 15
-      ? "hard"
-      : chosenDifficulty;
-  console.log(lengthOfFirstLine, chosenDifficulty);
-  flatArray = schemes[select.selectedIndex].flat();
-  flatArrayForCheck = flatArray.map((item) => {
-    return item === 1 ? 0 : item;
-  });
-  infoMessage.style.display = "none";
-  resetButton.disabled = false;
-  initGame(chosenDifficulty, select.selectedIndex);
-});
+select.addEventListener("change", changeSchema);
+randomGameButton.addEventListener("click", randomGame);
+
 
 // сброс игры
 resetButton.addEventListener("click", () => {
