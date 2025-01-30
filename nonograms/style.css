@@ -33,7 +33,6 @@ body {
     flex-direction: column;
     justify-content: space-between;  
     align-items: center;
-    background-color: aquamarine;
     outline: 1px solid black;
     padding: 10px;
 }
@@ -96,4 +95,17 @@ body {
 
 .topLevelOfField {
   align-self: flex-end;
+}
+
+.footerBlock {
+    display: flex;
+    width: 100%;
+}
+
+.infoMessage {
+    display: none;
+    width: 50%;
+    font-size: 13px;
+    padding: 5px;
+    text-align: center;
 }
