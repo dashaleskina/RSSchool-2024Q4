@@ -25,6 +25,26 @@ let seconds = 0;
 const nonogramField = document.createElement("div");
 nonogramField.className = "nonogramField";
 
+const headerBlock = document.createElement("div");
+headerBlock.classList = "headerBlock";
+
+const headerBlockTitle = document.createElement("div");
+headerBlockTitle.classList = "headerBlockTitle";
+headerBlockTitle.textContent = "Nonograms"
+headerBlock.appendChild(headerBlockTitle)
+
+const headerBlockOptions = document.createElement("div");
+headerBlockOptions.classList = "headerBlockOptions"
+headerBlock.appendChild(headerBlockOptions)
+
+const changeThemeButton = document.createElement("button");
+changeThemeButton.classList = "changeThemeButton"
+headerBlockOptions.appendChild(changeThemeButton);
+
+const bestScore = document.createElement("button");
+bestScore.classList = "bestScore"
+headerBlockOptions.appendChild(bestScore);
+
 const leftHintsField = document.createElement("div");
 leftHintsField.className = "leftHintsField";
 
@@ -105,6 +125,7 @@ infoMessage.textContent = "Great! You have solved the nonogram!";
 infoBlock.appendChild(infoMessage);
 
 function createStartScreen(container, difficulty, number) {
+  container.appendChild(headerBlock)
   topLevelOfField.appendChild(createTopHintsField(difficulty, number));
 
   container.appendChild(topLevelOfField);

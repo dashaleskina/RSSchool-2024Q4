@@ -10,17 +10,55 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #fff;
+  background-image: url(/nonograms/images/back.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .gamepad {
-  background-color: #d5d5d5;
+  background-color: rgb(187,217,252);
   padding: 20px;
   margin: 20px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 3px solid rgb(202,103,134);
+  box-shadow: -5px 5px rgb(255,196,213);
+}
+
+.headerBlock {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 10px 0;
+}
+
+.headerBlockTitle {
+    display: flex;
+    align-items: center;
+}
+
+.headerBlockOptions {
+    display: flex;
+    gap: 10px;
+}
+
+.changeThemeButton {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: rgb(255,229,154);
+    border: 3px solid rgb(202,103,134)
+}
+
+.bestScore {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: rgb(255,178,204);
+    border: 3px solid rgb(202,103,134)
 }
 
 .nonogramField {
@@ -131,6 +169,7 @@ body {
 .timer {
     display: flex;
     padding: 10px;
+    padding-left: 0;
     width: 40%;
     gap: 2px;
     justify-content: flex-start;
