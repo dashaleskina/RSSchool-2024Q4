@@ -269,7 +269,13 @@ function changeSchema() {
 }
 
 function randomGame () {
-    const randomIndex = Math.floor(Math.random() * schemes.length);
+    const randomDifficultyIndex = Math.floor(Math.random() * difficultyLevels.length);
+    const randomDifficulty = difficultyLevels[randomDifficultyIndex];
+
+    selectDifficulty.value = randomDifficulty;
+    filterSchemesByDifficulty(randomDifficulty);
+
+    const randomIndex = Math.floor(Math.random() * select.options.length);
     select.selectedIndex = randomIndex;
     changeSchema();
 }
