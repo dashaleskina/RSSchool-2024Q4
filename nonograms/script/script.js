@@ -17,6 +17,10 @@ let flatArray = schemes[0].flat();
 let flatArrayForCheck = flatArray.map((item) => {
   return item === 1 ? 0 : item;
 });
+let timerInterval;
+let timerStarted = false;
+let minutes = 0;
+let seconds = 0;
 
 const nonogramField = document.createElement("div");
 nonogramField.className = "nonogramField";
@@ -65,10 +69,30 @@ menu.appendChild(resetButton);
 const footerBlock = document.createElement("div");
 footerBlock.classList = "footerBlock";
 
+const timer = document.createElement("div");
+timer.classList = "timer";
+timer.textContent = "Time:"
+footerBlock.appendChild(timer)
+
+for (let i = 0; i < 5; i++) {
+    const span = document.createElement("span");
+    span.classList = "timerSpan";
+    span.textContent = "0";
+    if (i === 2) {
+        span.textContent = ":"
+    }
+    timer.appendChild(span);
+  }
+
+const infoBlock = document.createElement("div");
+infoBlock.classList = "infoBlock";
+footerBlock.appendChild(infoBlock);
+
+
 const infoMessage = document.createElement("div");
 infoMessage.classList = "infoMessage";
 infoMessage.textContent = "Great! You have solved the nonogram!";
-footerBlock.appendChild(infoMessage);
+infoBlock.appendChild(infoMessage);
 
 function createStartScreen(container, difficulty, number) {
   topLevelOfField.appendChild(createTopHintsField(difficulty, number));
@@ -201,6 +225,8 @@ function checkSchemaAnswer(index, value) {
     cellsArray.forEach((cell) => {
       cell.classList.add("disabledCell");
     });
+
+    stopTimer();
   } else {
     console.log("continue", flatArray, flatArrayForCheck);
   }
@@ -251,7 +277,38 @@ function showSolution () {
       });
 }
 
+function startTimer() {
+    timerInterval = setInterval(() => {
+        seconds++;
+        if (seconds === 60) {
+            minutes++;
+        }
 
+        updateTimerDisplay();
+    }, 1000)
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+function updateTimerDisplay() {
+  const timerSpans = document.querySelectorAll(".timerSpan");
+
+  const minuteTens = Math.floor(minutes / 10);
+  const minuteOnes = minutes % 10;
+
+  const secondTens = Math.floor(seconds / 10);
+  const secondOnes = seconds % 10;
+
+  timerSpans[0].textContent = minuteTens;
+  timerSpans[1].textContent = minuteOnes;
+  timerSpans[2].textContent = ":"
+  timerSpans[3].textContent = secondTens;
+  timerSpans[4].textContent = secondOnes;
+}
+
+//инициализация
 function initGame(difficulty, number) {
   let gamepad = document.querySelector(".gamepad");
   if (!gamepad) {
@@ -269,6 +326,11 @@ function addCellEventListeners() {
 
   cellsArray.forEach((cell, index) => {
     cell.addEventListener("click", () => {
+        if (!timerStarted) {
+            startTimer();
+            timerStarted = true;
+        }
+
       if (cell.classList.contains("shadedCell")) {
         cell.classList.remove("shadedCell");
         checkSchemaAnswer(index, 0);
@@ -281,6 +343,11 @@ function addCellEventListeners() {
 
     cell.addEventListener("contextmenu", (e) => {
       e.preventDefault();
+      if (!timerStarted) {
+        startTimer();
+        timerStarted = true;
+    }
+
       if (cell.classList.contains("crossCell")) {
         cell.classList.remove("crossCell");
         checkSchemaAnswer(index, null);
@@ -293,7 +360,7 @@ function addCellEventListeners() {
   });
 }
 
-// выбор схемы
+// слушатели
 select.addEventListener("change", changeSchema);
 randomGameButton.addEventListener("click", randomGame);
 showSolutionButton.addEventListener("click", showSolution);
@@ -308,6 +375,12 @@ resetButton.addEventListener("click", () => {
   showSolutionButton.disabled = false;
   infoMessage.style.display = "none";
 
+  stopTimer();
+  timerStarted = false;
+  minutes = 0;
+  seconds = 0;
+  updateTimerDisplay();
 });
 
+//вызов инициализации
 initGame(chosenDifficulty, indexOfSchema);
