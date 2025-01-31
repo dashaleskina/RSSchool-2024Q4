@@ -16,6 +16,8 @@ export const schemesNames = [
   "lion 15x15",
 ];
 
+export const difficultyLevels = ["easy", "medium", "hard"];
+
 export const schemes = [
   [
     //chicken
@@ -109,7 +111,8 @@ export const schemes = [
     [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
     [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
   ],
-  [//heart
+  [
+    //heart
     [0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
     [1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
     [1, 0, 0, 0, 1, 1, 0, 0, 0, 1],

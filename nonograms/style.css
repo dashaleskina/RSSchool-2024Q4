@@ -37,7 +37,7 @@ body {
     padding: 10px;
 }
 
-.select {
+.select, .selectDifficulty {
     height: 20px;
     width: 120px;
 }

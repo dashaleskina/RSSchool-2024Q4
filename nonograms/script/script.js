@@ -1,5 +1,5 @@
 //imports
-import { schemes, schemesNames } from "./schemes.js";
+import { schemes, schemesNames, difficultyLevels } from "./schemes.js";
 import {
   setSizeOfField,
   setSizeOfCell,
@@ -40,6 +40,16 @@ bottomLevelOfField.className = "bottomLevelOfField";
 const menu = document.createElement("div");
 menu.classList = "menu";
 topLevelOfField.appendChild(menu);
+
+const selectDifficulty = document.createElement("select");
+selectDifficulty.classList = "selectDifficulty"
+difficultyLevels.forEach((diffText) => {
+    const option = document.createElement("option");
+    option.value = diffText;
+    option.textContent = diffText;
+    selectDifficulty.appendChild(option);
+})
+menu.appendChild(selectDifficulty);
 
 const select = document.createElement("select");
 select.classList = "select";
@@ -308,6 +318,32 @@ function updateTimerDisplay() {
   timerSpans[4].textContent = secondOnes;
 }
 
+function filterSchemesByDifficulty(difficulty) {
+    select.innerHTML = "";
+
+    const sizeMap = {
+        easy: 5,
+        medium: 10,
+        hard: 15,
+    }
+
+    const targetSize = sizeMap[difficulty];
+
+    schemes.forEach((scheme, index) => {
+        if (scheme[0].length === targetSize) {
+            const option = document.createElement("option");
+            option.value = schemesNames[index];
+            option.textContent = schemesNames[index];
+            select.appendChild(option)
+        }
+    });
+
+    if (select.options.length > 0) {
+        select.selectedIndex = 0;
+        changeSchema()
+    }
+}
+
 //инициализация
 function initGame(difficulty, number) {
   let gamepad = document.querySelector(".gamepad");
@@ -319,6 +355,8 @@ function initGame(difficulty, number) {
   createStartScreen(gamepad, difficulty, number);
   addCellEventListeners();
 }
+
+filterSchemesByDifficulty(chosenDifficulty);
 
 // клик по клетке
 function addCellEventListeners() {
@@ -361,6 +399,10 @@ function addCellEventListeners() {
 }
 
 // слушатели
+selectDifficulty.addEventListener("change", () => {
+    const selectedDifficulty = selectDifficulty.value;
+    filterSchemesByDifficulty(selectedDifficulty);
+})
 select.addEventListener("change", changeSchema);
 randomGameButton.addEventListener("click", randomGame);
 showSolutionButton.addEventListener("click", showSolution);
