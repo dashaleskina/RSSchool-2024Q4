@@ -25,6 +25,9 @@ let seconds = 0;
 const nonogramField = document.createElement("div");
 nonogramField.className = "nonogramField";
 
+const optionBlock = document.createElement("div");
+optionBlock.classList = "optionBlock";
+
 const headerBlock = document.createElement("div");
 headerBlock.classList = "headerBlock";
 
@@ -60,6 +63,7 @@ bottomLevelOfField.className = "bottomLevelOfField";
 const menu = document.createElement("div");
 menu.classList = "menu";
 topLevelOfField.appendChild(menu);
+//optionBlock.append(menu)
 
 const selectDifficulty = document.createElement("select");
 selectDifficulty.classList = "selectDifficulty"
@@ -84,17 +88,17 @@ menu.appendChild(select);
 const randomGameButton = document.createElement("button");
 randomGameButton.classList = "randomGameButton";
 randomGameButton.textContent = "Random game";
-menu.appendChild(randomGameButton);
+optionBlock.appendChild(randomGameButton);
 
 const showSolutionButton = document.createElement("button");
 showSolutionButton.classList = "showSolutionButton";
-showSolutionButton.textContent = "Show solution";
-menu.appendChild(showSolutionButton);
+showSolutionButton.textContent = "solution";
+optionBlock.appendChild(showSolutionButton);
 
 const resetButton = document.createElement("button");
 resetButton.classList = "resetButton";
 resetButton.textContent = "Reset";
-menu.appendChild(resetButton);
+optionBlock.appendChild(resetButton);
 
 const footerBlock = document.createElement("div");
 footerBlock.classList = "footerBlock";
@@ -249,7 +253,7 @@ function checkSchemaAnswer(index, value) {
   }
 
   if (JSON.stringify(flatArrayForCheck) === JSON.stringify(flatArray)) {
-    infoMessage.style.display = "flex";
+    infoMessage.style.visibility = "visible";
     showSolutionButton.disabled = true;
 
     const cellsArray = document.querySelectorAll(".nonogramField .cell");
@@ -283,7 +287,7 @@ function changeSchema() {
     return item === 1 ? 0 : item;
   });
 
-  infoMessage.style.display = "none";
+  infoMessage.style.visibility = "hidden";
   resetButton.disabled = false;
   showSolutionButton.disabled = false;
   initGame(chosenDifficulty, schemaIndex);
@@ -378,15 +382,19 @@ function filterSchemesByDifficulty(difficulty) {
 
 //инициализация
 function initGame(difficulty, number) {
+    document.body.appendChild(optionBlock);
   let gamepad = document.querySelector(".gamepad");
+  
   if (!gamepad) {
     gamepad = document.createElement("div");
     gamepad.className = "gamepad";
     document.body.appendChild(gamepad);
   }
+
   gamepad.innerHTML = "";
   createStartScreen(gamepad, difficulty, number);
   addCellEventListeners();
+
 }
 
 filterSchemesByDifficulty(chosenDifficulty);
@@ -448,7 +456,7 @@ resetButton.addEventListener("click", () => {
     return item === 1 ? 0 : item;
   });
   showSolutionButton.disabled = false;
-  infoMessage.style.display = "none";
+  infoMessage.style.visibility = "hidden";
 
   stopTimer();
   timerStarted = false;
