@@ -243,8 +243,11 @@ function checkSchemaAnswer(index, value) {
 }
 
 function changeSchema() {
+    const selectedOption = select.options[select.selectedIndex];
+    const schemaIndex = parseInt(selectedOption.getAttribute("data-index"), 10);
+
   selectedText = select.options[select.selectedIndex].text;
-  lengthOfFirstLine = schemes[select.selectedIndex][0].length;
+  lengthOfFirstLine = schemes[schemaIndex][0].length;
   chosenDifficulty =
     lengthOfFirstLine === 5
       ? "easy"
@@ -254,7 +257,7 @@ function changeSchema() {
       ? "hard"
       : chosenDifficulty;
 
-  flatArray = schemes[select.selectedIndex].flat();
+  flatArray = schemes[schemaIndex].flat();
   flatArrayForCheck = flatArray.map((item) => {
     return item === 1 ? 0 : item;
   });
@@ -262,7 +265,7 @@ function changeSchema() {
   infoMessage.style.display = "none";
   resetButton.disabled = false;
   showSolutionButton.disabled = false;
-  initGame(chosenDifficulty, select.selectedIndex);
+  initGame(chosenDifficulty, schemaIndex);
 }
 
 function randomGame () {
@@ -291,6 +294,7 @@ function startTimer() {
     timerInterval = setInterval(() => {
         seconds++;
         if (seconds === 60) {
+            seconds = 0
             minutes++;
         }
 
@@ -334,6 +338,7 @@ function filterSchemesByDifficulty(difficulty) {
             const option = document.createElement("option");
             option.value = schemesNames[index];
             option.textContent = schemesNames[index];
+            option.setAttribute("data-index", index)
             select.appendChild(option)
         }
     });
@@ -352,6 +357,7 @@ function initGame(difficulty, number) {
     gamepad.className = "gamepad";
     document.body.appendChild(gamepad);
   }
+  gamepad.innerHTML = "";
   createStartScreen(gamepad, difficulty, number);
   addCellEventListeners();
 }
