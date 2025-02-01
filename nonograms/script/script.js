@@ -30,7 +30,6 @@ dialog.classList = "child";
 const wrapper = createDiv("dialogWrapper", dialog);
 const closeButton = createButton("closeButton", "Close", wrapper);
 document.body.appendChild(dialog);
-
 //создание элементов игрового поля
 const nonogramField = createDiv("nonogramField");
 const optionBlock = createDiv("optionBlock");
@@ -57,13 +56,14 @@ const topHintsField = createDiv("topHintsField");
 const topLevelOfField = createDiv("topLevelOfField");
 const bottomLevelOfField = createDiv("bottomLevelOfField");
 const menu = createDiv("menu", topLevelOfField);
+const footerBlock = createDiv("footerBlock");
+const timer = createDiv("timer", footerBlock, "Time:");
 const infoBlock = createDiv("infoBlock", footerBlock);
 const infoMessage = createDiv(
   "infoMessage",
   infoBlock,
   "Great! You have solved the nonogram!"
 );
-const timer = createDiv("timer", footerBlock, "Time:");
 
 const selectDifficulty = document.createElement("select");
 selectDifficulty.classList = "selectDifficulty";
@@ -107,7 +107,6 @@ const showSolutionButton = createButton(
   optionBlock
 );
 const resetButton = createButton("resetButton", "Reset", optionBlock);
-const footerBlock = createDiv("footerBlock");
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

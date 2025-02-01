@@ -34,7 +34,7 @@ body {
 
 dialog {
   position: fixed;
-  background-color: rgb(167,160,254);
+  background-color: rgb(167, 160, 254);
   border: 3px solid rgb(202, 103, 134);
   box-shadow: 5px 5px rgb(255, 196, 213);
   height: 250px;
@@ -65,11 +65,17 @@ dialog {
   align-items: center;
 }
 
-.closeButton:active, .randomGameButton:active, .showSolutionButton:active, .resetButton:active, .changeThemeButton:active, .bestScore:active, .openMenuButton:active {
-    top: 3px;
-    box-shadow: 0 2px 0px rgba(0, 0, 0, 0.5);
-    transition: all 0.2s;
-  }
+.closeButton:active,
+.randomGameButton:active,
+.showSolutionButton:active,
+.resetButton:active,
+.changeThemeButton:active,
+.bestScore:active,
+.openMenuButton:active {
+  top: 3px;
+  box-shadow: 0 2px 0px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s;
+}
 
 .dialogWrapper {
   padding: 1em;
@@ -103,6 +109,9 @@ dialog::backdrop {
   align-items: center;
   justify-content: center;
   border: 3px solid rgb(202, 103, 134);
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .headerBlock {
@@ -123,7 +132,9 @@ dialog::backdrop {
   gap: 10px;
 }
 
-.changeThemeButton, .bestScore, .openMenuButton {
+.changeThemeButton,
+.bestScore,
+.openMenuButton {
   width: 30px;
   height: 30px;
   border-radius: 100%;
@@ -137,11 +148,14 @@ dialog::backdrop {
 }
 
 .openMenuButton {
-    display: flex;
-    width: 55px;
-    padding: 5px;
-    background-color: rgb(167,160,254);
-    align-items: center;
+  display: flex;
+  width: 55px;
+  padding: 5px;
+  background-color: rgb(167, 160, 254);
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .nonogramField {
@@ -239,10 +253,6 @@ dialog::backdrop {
   display: flex;
 }
 
-/* .topLevelOfField {
-  align-self: flex-end;
-} */
-
 .footerBlock {
   display: flex;
   width: 85%;
@@ -277,4 +287,15 @@ dialog::backdrop {
   text-align: center;
   width: 10px;
   justify-content: center;
+}
+
+@media (max-width: 1000px) {
+  .optionBlock {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  .openMenuButton {
+    opacity: 1;
+    visibility: visible;
+  }
 }
