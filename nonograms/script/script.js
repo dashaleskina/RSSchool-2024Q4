@@ -22,6 +22,22 @@ let timerStarted = false;
 let minutes = 0;
 let seconds = 0;
 
+const dialog = document.createElement("dialog");
+dialog.id = "myDialog";
+dialog.classList = "child";
+
+const wrapper = document.createElement("div");
+wrapper.className = "dialogWrapper";
+
+const closeButton = document.createElement("button");
+closeButton.className = "closeButton";
+closeButton.type = "button";
+closeButton.innerHTML = "Close";
+
+wrapper.appendChild(closeButton);
+dialog.appendChild(wrapper);
+document.body.appendChild(dialog);
+
 const nonogramField = document.createElement("div");
 nonogramField.className = "nonogramField";
 
@@ -39,6 +55,11 @@ headerBlock.appendChild(headerBlockTitle)
 const headerBlockOptions = document.createElement("div");
 headerBlockOptions.classList = "headerBlockOptions"
 headerBlock.appendChild(headerBlockOptions)
+
+const openMenuButton = document.createElement("button");
+openMenuButton.classList = "openMenuButton";
+openMenuButton.textContent = "menu"
+headerBlockOptions.append(openMenuButton);
 
 const changeThemeButton = document.createElement("button");
 changeThemeButton.classList = "changeThemeButton"
@@ -384,7 +405,7 @@ function filterSchemesByDifficulty(difficulty) {
 function initGame(difficulty, number) {
     document.body.appendChild(optionBlock);
   let gamepad = document.querySelector(".gamepad");
-  
+
   if (!gamepad) {
     gamepad = document.createElement("div");
     gamepad.className = "gamepad";
@@ -464,6 +485,40 @@ resetButton.addEventListener("click", () => {
   seconds = 0;
   updateTimerDisplay();
 });
+
+const dialogCloser = dialog.querySelector('.closeButton')
+
+function closeOnOverlay({ currentTarget, target }) {
+    const dialog = currentTarget
+    const isClickedOnBackDrop = target === dialog
+    if (isClickedOnBackDrop) {
+      close()
+    }
+  }
+  
+  function lockScroll() {
+    dialog.showModal()
+    document.body.classList.add('scroll-lock')
+  }
+  
+  function returnScroll() {
+    document.body.classList.remove('scroll-lock')
+  }
+  
+  function close() {
+    dialog.close()
+    returnScroll()
+  }
+  
+  dialog.addEventListener('click', closeOnOverlay)
+  dialog.addEventListener('cancel', (event) => {
+    returnScroll()
+  });
+  openMenuButton.addEventListener('click', lockScroll)
+  dialogCloser.addEventListener('click', (event) => {
+    event.stopPropagation()
+    close()
+  })
 
 //вызов инициализации
 initGame(chosenDifficulty, indexOfSchema);

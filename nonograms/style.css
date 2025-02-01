@@ -29,7 +29,58 @@ body {
   flex-direction: column;
   align-items: center;
   border: 3px solid rgb(202, 103, 134);
-  box-shadow: -5px 5px rgb(255, 196, 213);
+  box-shadow: 5px 5px rgb(255, 196, 213);
+}
+
+dialog {
+  position: fixed;
+  background-color: rgb(167,160,254);
+  border: 3px solid rgb(202, 103, 134);
+  box-shadow: 5px 5px rgb(255, 196, 213);
+  height: 250px;
+  width: 350px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  padding: 0;
+  color: #000000;
+  text-align: center;
+}
+
+.closeButton {
+  background-color: rgb(236, 227, 214);
+  box-shadow: 2px 5px 0px rgba(0, 0, 0, 0.3);
+  margin: 15% auto 0;
+  border: 2px solid rgb(94, 79, 59);
+  min-width: 210px;
+  border-radius: 6px;
+  padding: 9px 15px;
+  font-size: 18px;
+  font-weight: 300;
+  font-family: inherit;
+  transition: background-color 0.2s linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.closeButton:active, .randomGameButton:active, .showSolutionButton:active, .resetButton:active, .changeThemeButton:active, .bestScore:active, .openMenuButton:active {
+    top: 3px;
+    box-shadow: 0 2px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s;
+  }
+
+.dialogWrapper {
+  padding: 1em;
+}
+
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.8);
+}
+
+.scroll-lock {
+  overflow: hidden;
 }
 
 .optionBlock {
@@ -66,20 +117,25 @@ body {
   gap: 10px;
 }
 
-.changeThemeButton {
+.changeThemeButton, .bestScore, .openMenuButton {
   width: 30px;
   height: 30px;
   border-radius: 100%;
   background-color: rgb(255, 229, 154);
   border: 3px solid rgb(202, 103, 134);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
 }
 
 .bestScore {
-  width: 30px;
-  height: 30px;
-  border-radius: 100%;
   background-color: rgb(255, 178, 204);
-  border: 3px solid rgb(202, 103, 134);
+}
+
+.openMenuButton {
+    display: flex;
+    width: 55px;
+    padding: 5px;
+    background-color: rgb(167,160,254);
+    align-items: center;
 }
 
 .nonogramField {
@@ -118,6 +174,7 @@ body {
   padding: 5px;
   padding-top: 0;
   align-items: center;
+  box-shadow: 2px 5px 0px rgba(0, 0, 0, 0.3);
 }
 
 .randomGameButton:hover,
