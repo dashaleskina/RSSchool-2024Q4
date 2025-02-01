@@ -49,24 +49,24 @@ headerBlock.classList = "headerBlock";
 
 const headerBlockTitle = document.createElement("div");
 headerBlockTitle.classList = "headerBlockTitle";
-headerBlockTitle.textContent = "Nonograms"
-headerBlock.appendChild(headerBlockTitle)
+headerBlockTitle.textContent = "Nonograms";
+headerBlock.appendChild(headerBlockTitle);
 
 const headerBlockOptions = document.createElement("div");
-headerBlockOptions.classList = "headerBlockOptions"
-headerBlock.appendChild(headerBlockOptions)
+headerBlockOptions.classList = "headerBlockOptions";
+headerBlock.appendChild(headerBlockOptions);
 
 const openMenuButton = document.createElement("button");
 openMenuButton.classList = "openMenuButton";
-openMenuButton.textContent = "menu"
+openMenuButton.textContent = "menu";
 headerBlockOptions.append(openMenuButton);
 
 const changeThemeButton = document.createElement("button");
-changeThemeButton.classList = "changeThemeButton"
+changeThemeButton.classList = "changeThemeButton";
 headerBlockOptions.appendChild(changeThemeButton);
 
 const bestScore = document.createElement("button");
-bestScore.classList = "bestScore"
+bestScore.classList = "bestScore";
 headerBlockOptions.appendChild(bestScore);
 
 const leftHintsField = document.createElement("div");
@@ -87,13 +87,13 @@ topLevelOfField.appendChild(menu);
 //optionBlock.append(menu)
 
 const selectDifficulty = document.createElement("select");
-selectDifficulty.classList = "selectDifficulty"
+selectDifficulty.classList = "selectDifficulty";
 difficultyLevels.forEach((diffText) => {
-    const option = document.createElement("option");
-    option.value = diffText;
-    option.textContent = diffText;
-    selectDifficulty.appendChild(option);
-})
+  const option = document.createElement("option");
+  option.value = diffText;
+  option.textContent = diffText;
+  selectDifficulty.appendChild(option);
+});
 menu.appendChild(selectDifficulty);
 
 const select = document.createElement("select");
@@ -126,23 +126,22 @@ footerBlock.classList = "footerBlock";
 
 const timer = document.createElement("div");
 timer.classList = "timer";
-timer.textContent = "Time:"
-footerBlock.appendChild(timer)
+timer.textContent = "Time:";
+footerBlock.appendChild(timer);
 
 for (let i = 0; i < 5; i++) {
-    const span = document.createElement("span");
-    span.classList = "timerSpan";
-    span.textContent = "0";
-    if (i === 2) {
-        span.textContent = ":"
-    }
-    timer.appendChild(span);
+  const span = document.createElement("span");
+  span.classList = "timerSpan";
+  span.textContent = "0";
+  if (i === 2) {
+    span.textContent = ":";
   }
+  timer.appendChild(span);
+}
 
 const infoBlock = document.createElement("div");
 infoBlock.classList = "infoBlock";
 footerBlock.appendChild(infoBlock);
-
 
 const infoMessage = document.createElement("div");
 infoMessage.classList = "infoMessage";
@@ -150,7 +149,7 @@ infoMessage.textContent = "Great! You have solved the nonogram!";
 infoBlock.appendChild(infoMessage);
 
 function createStartScreen(container, difficulty, number) {
-  container.appendChild(headerBlock)
+  container.appendChild(headerBlock);
   topLevelOfField.appendChild(createTopHintsField(difficulty, number));
 
   container.appendChild(topLevelOfField);
@@ -276,6 +275,7 @@ function checkSchemaAnswer(index, value) {
   if (JSON.stringify(flatArrayForCheck) === JSON.stringify(flatArray)) {
     infoMessage.style.visibility = "visible";
     showSolutionButton.disabled = true;
+    showSolutionButton.style.pointerEvents = "none";
 
     const cellsArray = document.querySelectorAll(".nonogramField .cell");
     cellsArray.forEach((cell) => {
@@ -289,8 +289,8 @@ function checkSchemaAnswer(index, value) {
 }
 
 function changeSchema() {
-    const selectedOption = select.options[select.selectedIndex];
-    const schemaIndex = parseInt(selectedOption.getAttribute("data-index"), 10);
+  const selectedOption = select.options[select.selectedIndex];
+  const schemaIndex = parseInt(selectedOption.getAttribute("data-index"), 10);
 
   selectedText = select.options[select.selectedIndex].text;
   lengthOfFirstLine = schemes[schemaIndex][0].length;
@@ -311,51 +311,59 @@ function changeSchema() {
   infoMessage.style.visibility = "hidden";
   resetButton.disabled = false;
   showSolutionButton.disabled = false;
+  showSolutionButton.style.pointerEvents = "auto";
   initGame(chosenDifficulty, schemaIndex);
 }
 
-function randomGame () {
-    const randomDifficultyIndex = Math.floor(Math.random() * difficultyLevels.length);
-    const randomDifficulty = difficultyLevels[randomDifficultyIndex];
+function randomGame() {
+  const randomDifficultyIndex = Math.floor(
+    Math.random() * difficultyLevels.length
+  );
+  const randomDifficulty = difficultyLevels[randomDifficultyIndex];
 
-    selectDifficulty.value = randomDifficulty;
-    filterSchemesByDifficulty(randomDifficulty);
+  selectDifficulty.value = randomDifficulty;
+  filterSchemesByDifficulty(randomDifficulty);
 
-    const randomIndex = Math.floor(Math.random() * select.options.length);
-    select.selectedIndex = randomIndex;
-    changeSchema();
+  const randomIndex = Math.floor(Math.random() * select.options.length);
+  select.selectedIndex = randomIndex;
+  changeSchema();
 }
 
-function showSolution () {
-    const cellsArray = document.querySelectorAll(".nonogramField .cell");
-    flatArray.forEach((value, index) => {
-        if (value === 1) {
-            cellsArray[index].classList.add("shadedCell")
-            showSolutionButton.disabled = true;
-
-        } else {
-            cellsArray[index].classList.remove("shadedCell")
-        }
-    })
-    cellsArray.forEach((cell) => {
-        cell.classList.add("disabledCell");
-      });
+function showSolution() {
+  const cellsArray = document.querySelectorAll(".nonogramField .cell");
+  flatArray.forEach((value, index) => {
+    if (value === 1) {
+      cellsArray[index].classList.add("shadedCell");
+      // showSolutionButton.disabled = true;
+      // showSolutionButton.style.pointerEvents = "none"
+    } else {
+      cellsArray[index].classList.remove("shadedCell");
+    }
+  });
+  cellsArray.forEach((cell) => {
+    cell.classList.add("disabledCell");
+  });
+  stopTimer();
+  timerStarted = false;
+  minutes = 0;
+  seconds = 0;
+  updateTimerDisplay();
 }
 
 function startTimer() {
-    timerInterval = setInterval(() => {
-        seconds++;
-        if (seconds === 60) {
-            seconds = 0
-            minutes++;
-        }
+  timerInterval = setInterval(() => {
+    seconds++;
+    if (seconds === 60) {
+      seconds = 0;
+      minutes++;
+    }
 
-        updateTimerDisplay();
-    }, 1000)
+    updateTimerDisplay();
+  }, 1000);
 }
 
 function stopTimer() {
-    clearInterval(timerInterval);
+  clearInterval(timerInterval);
 }
 
 function updateTimerDisplay() {
@@ -369,41 +377,41 @@ function updateTimerDisplay() {
 
   timerSpans[0].textContent = minuteTens;
   timerSpans[1].textContent = minuteOnes;
-  timerSpans[2].textContent = ":"
+  timerSpans[2].textContent = ":";
   timerSpans[3].textContent = secondTens;
   timerSpans[4].textContent = secondOnes;
 }
 
 function filterSchemesByDifficulty(difficulty) {
-    select.innerHTML = "";
+  select.innerHTML = "";
 
-    const sizeMap = {
-        easy: 5,
-        medium: 10,
-        hard: 15,
+  const sizeMap = {
+    easy: 5,
+    medium: 10,
+    hard: 15,
+  };
+
+  const targetSize = sizeMap[difficulty];
+
+  schemes.forEach((scheme, index) => {
+    if (scheme[0].length === targetSize) {
+      const option = document.createElement("option");
+      option.value = schemesNames[index];
+      option.textContent = schemesNames[index];
+      option.setAttribute("data-index", index);
+      select.appendChild(option);
     }
+  });
 
-    const targetSize = sizeMap[difficulty];
-
-    schemes.forEach((scheme, index) => {
-        if (scheme[0].length === targetSize) {
-            const option = document.createElement("option");
-            option.value = schemesNames[index];
-            option.textContent = schemesNames[index];
-            option.setAttribute("data-index", index)
-            select.appendChild(option)
-        }
-    });
-
-    if (select.options.length > 0) {
-        select.selectedIndex = 0;
-        changeSchema()
-    }
+  if (select.options.length > 0) {
+    select.selectedIndex = 0;
+    changeSchema();
+  }
 }
 
 //инициализация
 function initGame(difficulty, number) {
-    document.body.appendChild(optionBlock);
+  document.body.appendChild(optionBlock);
   let gamepad = document.querySelector(".gamepad");
 
   if (!gamepad) {
@@ -415,7 +423,6 @@ function initGame(difficulty, number) {
   gamepad.innerHTML = "";
   createStartScreen(gamepad, difficulty, number);
   addCellEventListeners();
-
 }
 
 filterSchemesByDifficulty(chosenDifficulty);
@@ -426,10 +433,10 @@ function addCellEventListeners() {
 
   cellsArray.forEach((cell, index) => {
     cell.addEventListener("click", () => {
-        if (!timerStarted) {
-            startTimer();
-            timerStarted = true;
-        }
+      if (!timerStarted) {
+        startTimer();
+        timerStarted = true;
+      }
 
       if (cell.classList.contains("shadedCell")) {
         cell.classList.remove("shadedCell");
@@ -446,7 +453,7 @@ function addCellEventListeners() {
       if (!timerStarted) {
         startTimer();
         timerStarted = true;
-    }
+      }
 
       if (cell.classList.contains("crossCell")) {
         cell.classList.remove("crossCell");
@@ -462,9 +469,9 @@ function addCellEventListeners() {
 
 // слушатели
 selectDifficulty.addEventListener("change", () => {
-    const selectedDifficulty = selectDifficulty.value;
-    filterSchemesByDifficulty(selectedDifficulty);
-})
+  const selectedDifficulty = selectDifficulty.value;
+  filterSchemesByDifficulty(selectedDifficulty);
+});
 select.addEventListener("change", changeSchema);
 randomGameButton.addEventListener("click", randomGame);
 showSolutionButton.addEventListener("click", showSolution);
@@ -476,7 +483,7 @@ resetButton.addEventListener("click", () => {
   flatArrayForCheck = flatArray.map((item) => {
     return item === 1 ? 0 : item;
   });
-  showSolutionButton.disabled = false;
+  showSolutionButton.style.pointerEvents = "auto";
   infoMessage.style.visibility = "hidden";
 
   stopTimer();
@@ -486,39 +493,39 @@ resetButton.addEventListener("click", () => {
   updateTimerDisplay();
 });
 
-const dialogCloser = dialog.querySelector('.closeButton')
+const dialogCloser = dialog.querySelector(".closeButton");
 
 function closeOnOverlay({ currentTarget, target }) {
-    const dialog = currentTarget
-    const isClickedOnBackDrop = target === dialog
-    if (isClickedOnBackDrop) {
-      close()
-    }
+  const dialog = currentTarget;
+  const isClickedOnBackDrop = target === dialog;
+  if (isClickedOnBackDrop) {
+    close();
   }
-  
-  function lockScroll() {
-    dialog.showModal()
-    document.body.classList.add('scroll-lock')
-  }
-  
-  function returnScroll() {
-    document.body.classList.remove('scroll-lock')
-  }
-  
-  function close() {
-    dialog.close()
-    returnScroll()
-  }
-  
-  dialog.addEventListener('click', closeOnOverlay)
-  dialog.addEventListener('cancel', (event) => {
-    returnScroll()
-  });
-  openMenuButton.addEventListener('click', lockScroll)
-  dialogCloser.addEventListener('click', (event) => {
-    event.stopPropagation()
-    close()
-  })
+}
+
+function lockScroll() {
+  dialog.showModal();
+  document.body.classList.add("scroll-lock");
+}
+
+function returnScroll() {
+  document.body.classList.remove("scroll-lock");
+}
+
+function close() {
+  dialog.close();
+  returnScroll();
+}
+
+dialog.addEventListener("click", closeOnOverlay);
+dialog.addEventListener("cancel", (event) => {
+  returnScroll();
+});
+openMenuButton.addEventListener("click", lockScroll);
+dialogCloser.addEventListener("click", (event) => {
+  event.stopPropagation();
+  close();
+});
 
 //вызов инициализации
 initGame(chosenDifficulty, indexOfSchema);
