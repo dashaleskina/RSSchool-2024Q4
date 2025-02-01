@@ -7,7 +7,7 @@ import {
   setHorizontalHints,
   setCountOfBlocksInHintsField,
 } from "./options.js";
-import { createButton } from "./createElements.js";
+import { createButton, createDiv } from "./createElements.js";
 
 //variables
 let selectedText;
@@ -23,62 +23,47 @@ let timerStarted = false;
 let minutes = 0;
 let seconds = 0;
 
+//создание элементов модалки
 const dialog = document.createElement("dialog");
 dialog.id = "myDialog";
 dialog.classList = "child";
-
-const wrapper = document.createElement("div");
-wrapper.className = "dialogWrapper";
-
-const closeButton = createButton("closeButton", "Close")
-
-wrapper.appendChild(closeButton);
-dialog.appendChild(wrapper);
+const wrapper = createDiv("dialogWrapper", dialog);
+const closeButton = createButton("closeButton", "Close", wrapper);
 document.body.appendChild(dialog);
 
-const nonogramField = document.createElement("div");
-nonogramField.className = "nonogramField";
-
-const optionBlock = document.createElement("div");
-optionBlock.classList = "optionBlock";
-
-const headerBlock = document.createElement("div");
-headerBlock.classList = "headerBlock";
-
-const headerBlockTitle = document.createElement("div");
-headerBlockTitle.classList = "headerBlockTitle";
-headerBlockTitle.textContent = "Nonograms";
-headerBlock.appendChild(headerBlockTitle);
-
-const headerBlockOptions = document.createElement("div");
-headerBlockOptions.classList = "headerBlockOptions";
-headerBlock.appendChild(headerBlockOptions);
-
-const openMenuButton = createButton("openMenuButton", "menu")
-headerBlockOptions.append(openMenuButton);
-
-const changeThemeButton = createButton("changeThemeButton")
-headerBlockOptions.appendChild(changeThemeButton);
-
-const bestScore = createButton("bestScore");
-headerBlockOptions.appendChild(bestScore);
-
-const leftHintsField = document.createElement("div");
-leftHintsField.className = "leftHintsField";
-
-const topHintsField = document.createElement("div");
-topHintsField.className = "topHintsField";
-
-const topLevelOfField = document.createElement("div");
-topLevelOfField.className = "topLevelOfField";
-
-const bottomLevelOfField = document.createElement("div");
-bottomLevelOfField.className = "bottomLevelOfField";
-
-const menu = document.createElement("div");
-menu.classList = "menu";
-topLevelOfField.appendChild(menu);
-//optionBlock.append(menu)
+//создание элементов игрового поля
+const nonogramField = createDiv("nonogramField");
+const optionBlock = createDiv("optionBlock");
+const headerBlock = createDiv("headerBlock");
+const headerBlockTitle = createDiv(
+  "headerBlockTitle",
+  headerBlock,
+  "Nonograms"
+);
+const headerBlockOptions = createDiv("headerBlockOptions", headerBlock);
+const openMenuButton = createButton(
+  "openMenuButton",
+  "menu",
+  headerBlockOptions
+);
+const changeThemeButton = createButton(
+  "changeThemeButton",
+  "",
+  headerBlockOptions
+);
+const bestScore = createButton("bestScore", "", headerBlockOptions);
+const leftHintsField = createDiv("leftHintsField");
+const topHintsField = createDiv("topHintsField");
+const topLevelOfField = createDiv("topLevelOfField");
+const bottomLevelOfField = createDiv("bottomLevelOfField");
+const menu = createDiv("menu", topLevelOfField);
+const infoBlock = createDiv("infoBlock", footerBlock);
+const infoMessage = createDiv(
+  "infoMessage",
+  infoBlock,
+  "Great! You have solved the nonogram!"
+);
+const timer = createDiv("timer", footerBlock, "Time:");
 
 const selectDifficulty = document.createElement("select");
 selectDifficulty.classList = "selectDifficulty";
@@ -100,23 +85,6 @@ schemesNames.forEach((optionText) => {
 });
 menu.appendChild(select);
 
-const randomGameButton = createButton("randomGameButton", "Random game");
-optionBlock.appendChild(randomGameButton);
-
-const showSolutionButton = createButton("showSolutionButton", "solution");
-optionBlock.appendChild(showSolutionButton);
-
-const resetButton = createButton("resetButton", "Reset");
-optionBlock.appendChild(resetButton);
-
-const footerBlock = document.createElement("div");
-footerBlock.classList = "footerBlock";
-
-const timer = document.createElement("div");
-timer.classList = "timer";
-timer.textContent = "Time:";
-footerBlock.appendChild(timer);
-
 for (let i = 0; i < 5; i++) {
   const span = document.createElement("span");
   span.classList = "timerSpan";
@@ -127,15 +95,23 @@ for (let i = 0; i < 5; i++) {
   timer.appendChild(span);
 }
 
-const infoBlock = document.createElement("div");
-infoBlock.classList = "infoBlock";
-footerBlock.appendChild(infoBlock);
+//создание элементов бокового меню
+const randomGameButton = createButton(
+  "randomGameButton",
+  "Random game",
+  optionBlock
+);
+const showSolutionButton = createButton(
+  "showSolutionButton",
+  "solution",
+  optionBlock
+);
+const resetButton = createButton("resetButton", "Reset", optionBlock);
+const footerBlock = createDiv("footerBlock");
 
-const infoMessage = document.createElement("div");
-infoMessage.classList = "infoMessage";
-infoMessage.textContent = "Great! You have solved the nonogram!";
-infoBlock.appendChild(infoMessage);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+//функциональность
 function createStartScreen(container, difficulty, number) {
   container.appendChild(headerBlock);
   topLevelOfField.appendChild(createTopHintsField(difficulty, number));
