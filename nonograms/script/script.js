@@ -7,6 +7,7 @@ import {
   setHorizontalHints,
   setCountOfBlocksInHintsField,
 } from "./options.js";
+import { createButton } from "./createElements.js";
 
 //variables
 let selectedText;
@@ -29,10 +30,7 @@ dialog.classList = "child";
 const wrapper = document.createElement("div");
 wrapper.className = "dialogWrapper";
 
-const closeButton = document.createElement("button");
-closeButton.className = "closeButton";
-closeButton.type = "button";
-closeButton.innerHTML = "Close";
+const closeButton = createButton("closeButton", "Close")
 
 wrapper.appendChild(closeButton);
 dialog.appendChild(wrapper);
@@ -56,17 +54,13 @@ const headerBlockOptions = document.createElement("div");
 headerBlockOptions.classList = "headerBlockOptions";
 headerBlock.appendChild(headerBlockOptions);
 
-const openMenuButton = document.createElement("button");
-openMenuButton.classList = "openMenuButton";
-openMenuButton.textContent = "menu";
+const openMenuButton = createButton("openMenuButton", "menu")
 headerBlockOptions.append(openMenuButton);
 
-const changeThemeButton = document.createElement("button");
-changeThemeButton.classList = "changeThemeButton";
+const changeThemeButton = createButton("changeThemeButton")
 headerBlockOptions.appendChild(changeThemeButton);
 
-const bestScore = document.createElement("button");
-bestScore.classList = "bestScore";
+const bestScore = createButton("bestScore");
 headerBlockOptions.appendChild(bestScore);
 
 const leftHintsField = document.createElement("div");
@@ -106,19 +100,13 @@ schemesNames.forEach((optionText) => {
 });
 menu.appendChild(select);
 
-const randomGameButton = document.createElement("button");
-randomGameButton.classList = "randomGameButton";
-randomGameButton.textContent = "Random game";
+const randomGameButton = createButton("randomGameButton", "Random game");
 optionBlock.appendChild(randomGameButton);
 
-const showSolutionButton = document.createElement("button");
-showSolutionButton.classList = "showSolutionButton";
-showSolutionButton.textContent = "solution";
+const showSolutionButton = createButton("showSolutionButton", "solution");
 optionBlock.appendChild(showSolutionButton);
 
-const resetButton = document.createElement("button");
-resetButton.classList = "resetButton";
-resetButton.textContent = "Reset";
+const resetButton = createButton("resetButton", "Reset");
 optionBlock.appendChild(resetButton);
 
 const footerBlock = document.createElement("div");
