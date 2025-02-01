@@ -313,6 +313,12 @@ function changeSchema() {
   showSolutionButton.disabled = false;
   showSolutionButton.style.pointerEvents = "auto";
   initGame(chosenDifficulty, schemaIndex);
+
+  stopTimer();
+  timerStarted = false;
+  minutes = 0;
+  seconds = 0;
+  updateTimerDisplay();
 }
 
 function randomGame() {
@@ -327,6 +333,12 @@ function randomGame() {
   const randomIndex = Math.floor(Math.random() * select.options.length);
   select.selectedIndex = randomIndex;
   changeSchema();
+
+  stopTimer();
+  timerStarted = false;
+  minutes = 0;
+  seconds = 0;
+  updateTimerDisplay();
 }
 
 function showSolution() {
@@ -485,12 +497,6 @@ resetButton.addEventListener("click", () => {
   });
   showSolutionButton.style.pointerEvents = "auto";
   infoMessage.style.visibility = "hidden";
-
-  stopTimer();
-  timerStarted = false;
-  minutes = 0;
-  seconds = 0;
-  updateTimerDisplay();
 });
 
 const dialogCloser = dialog.querySelector(".closeButton");
