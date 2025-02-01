@@ -28,6 +28,17 @@ const dialog = document.createElement("dialog");
 dialog.id = "myDialog";
 dialog.classList = "child";
 const wrapper = createDiv("dialogWrapper", dialog);
+const randomGameButtonInDialog = createButton(
+  "randomGameButton",
+  "Random game",
+  wrapper
+);
+const showSolutionButtonInDialog = createButton(
+  "showSolutionButton",
+  "solution",
+  wrapper
+);
+const resetButtonInDialog = createButton("resetButton", "Reset", wrapper);
 const closeButton = createButton("closeButton", "Close", wrapper);
 document.body.appendChild(dialog);
 //создание элементов игрового поля
@@ -325,6 +336,18 @@ function showSolution() {
   updateTimerDisplay();
 }
 
+function resetGame() {
+  const cellsArray = document.querySelectorAll(".nonogramField .cell");
+  cellsArray.forEach((cell) => {
+    cell.classList.remove("shadedCell", "crossCell", "disabledCell");
+  });
+  flatArrayForCheck = flatArray.map((item) => {
+    return item === 1 ? 0 : item;
+  });
+  showSolutionButton.style.pointerEvents = "auto";
+  infoMessage.style.visibility = "hidden";
+}
+
 function startTimer() {
   timerInterval = setInterval(() => {
     seconds++;
@@ -449,20 +472,20 @@ selectDifficulty.addEventListener("change", () => {
 });
 select.addEventListener("change", changeSchema);
 randomGameButton.addEventListener("click", randomGame);
-showSolutionButton.addEventListener("click", showSolution);
-resetButton.addEventListener("click", () => {
-  const cellsArray = document.querySelectorAll(".nonogramField .cell");
-  cellsArray.forEach((cell) => {
-    cell.classList.remove("shadedCell", "crossCell", "disabledCell");
-  });
-  flatArrayForCheck = flatArray.map((item) => {
-    return item === 1 ? 0 : item;
-  });
-  showSolutionButton.style.pointerEvents = "auto";
-  infoMessage.style.visibility = "hidden";
+randomGameButtonInDialog.addEventListener("click", () => {
+  randomGame();
+  close();
 });
-
-const dialogCloser = dialog.querySelector(".closeButton");
+showSolutionButton.addEventListener("click", showSolution);
+showSolutionButtonInDialog.addEventListener("click", () => {
+  showSolution();
+  close();
+});
+resetButton.addEventListener("click", resetGame);
+resetButtonInDialog.addEventListener("click", () => {
+  resetGame();
+  close();
+});
 
 function closeOnOverlay({ currentTarget, target }) {
   const dialog = currentTarget;
@@ -491,7 +514,7 @@ dialog.addEventListener("cancel", (event) => {
   returnScroll();
 });
 openMenuButton.addEventListener("click", lockScroll);
-dialogCloser.addEventListener("click", (event) => {
+closeButton.addEventListener("click", (event) => {
   event.stopPropagation();
   close();
 });

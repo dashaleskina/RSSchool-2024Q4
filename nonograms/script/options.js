@@ -6,7 +6,7 @@ export function setSizeOfField(difficulty) {
 
 //установка размера ячейки
 export function setSizeOfCell(difficulty) {
-  let sizes = difficulty === "hard" ? 25 : difficulty === "medium" ? 35 : 50;
+  let sizes = difficulty === "hard" ? 22 : difficulty === "medium" ? 25 : 45;
   return sizes;
 }
 

@@ -34,11 +34,11 @@ body {
 
 dialog {
   position: fixed;
+  min-width: 150px;
+  width: 250px;
   background-color: rgb(167, 160, 254);
   border: 3px solid rgb(202, 103, 134);
   box-shadow: 5px 5px rgb(255, 196, 213);
-  height: 250px;
-  width: 350px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -53,7 +53,7 @@ dialog {
   box-shadow: 2px 5px 0px rgba(0, 0, 0, 0.3);
   margin: 15% auto 0;
   border: 2px solid rgb(94, 79, 59);
-  min-width: 210px;
+  min-width: 150px;
   border-radius: 6px;
   padding: 9px 15px;
   font-size: 18px;
@@ -85,6 +85,7 @@ dialog {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 
 dialog::backdrop {
