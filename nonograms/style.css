@@ -13,7 +13,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url(/nonograms/images/back.jpg);
+  background-image: url(../nonograms/images/back.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
