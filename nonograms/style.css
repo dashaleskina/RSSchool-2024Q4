@@ -341,7 +341,7 @@ body.dark-theme {
 .dark-theme .highScoresDialog,
 .dark-theme .dialogWrapper,
 .dark-theme dialog {
-  background-color: rgb(10, 84, 169);
+  background-color: rgb(4, 67, 140);
   border-color: rgb(252, 233, 213);
 }
 .dark-theme .highScoresDialog {
@@ -371,3 +371,21 @@ body.dark-theme {
 .dark-theme .bestScore:hover {
   background-color: rgb(229, 146, 173);
 }
+
+.dark-theme .shadedCell {
+    background-color: rgb(236, 227, 214);
+}
+
+.dark-theme  .cellBorderRow {
+    border-right: 3px solid rgb(157, 152, 146);
+  }
+  
+  .dark-theme  .cellBorderColumn {
+    border-bottom: 3px solid rgb(157, 152, 146);
+  }
+
+  .dark-theme .cell {
+
+    outline: 1px solid rgb(236, 227, 214);
+
+  }
