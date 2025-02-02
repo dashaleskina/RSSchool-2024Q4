@@ -176,7 +176,7 @@ dialog::backdrop {
 .select,
 .selectDifficulty {
   height: 40px;
-  width: 120px;
+  width: 100px;
   background-color: rgb(255, 235, 145);
   text-align: center;
 }
@@ -290,7 +290,7 @@ dialog::backdrop {
   justify-content: center;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
   .optionBlock {
     transform: translateX(-100%);
     opacity: 0;
