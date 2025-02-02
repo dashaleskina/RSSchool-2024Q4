@@ -33,7 +33,7 @@ body {
   max-width: 500px;
 }
 
-dialog {
+dialog, .highScoresDialog {
   position: fixed;
   min-width: 150px;
   width: 250px;
@@ -289,6 +289,25 @@ dialog::backdrop {
   text-align: center;
   width: 10px;
   justify-content: center;
+}
+
+.highScoresDialog {
+    min-width: 400px;
+    padding: 10px;
+    padding-right: 5px;
+}
+
+.highScoresHeader {
+    color: aquamarine;
+}
+
+.highScoresRow {
+    display: flex;
+    justify-content: space-around;
+}
+
+.highScoresCell {
+    width: 33%;
 }
 
 @media (max-width: 900px) {

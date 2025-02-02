@@ -28,7 +28,7 @@ const crossSound = new Audio("../nonograms/sounds/pencilCross.wav");
 const eraseSound = new Audio("../nonograms/sounds/pencilErase.wav");
 const winSound = new Audio("../nonograms/sounds/win.mp3");
 
-//создание элементов модалки
+//создание элементов модалки c меню
 const dialog = document.createElement("dialog");
 dialog.id = "myDialog";
 dialog.classList = "child";
@@ -46,6 +46,32 @@ const showSolutionButtonInDialog = createButton(
 const resetButtonInDialog = createButton("resetButton", "Reset", wrapper);
 const closeButton = createButton("closeButton", "Close", wrapper);
 document.body.appendChild(dialog);
+
+//создание элементов модалки с лучшими результатами
+const highScoresDialog = document.createElement("dialog");
+highScoresDialog.id = "highScoresDialog";
+highScoresDialog.classList = "highScoresDialog";
+
+const highScoresTitle = document.createElement("h2");
+highScoresTitle.textContent = "High Scores";
+highScoresDialog.appendChild(highScoresTitle);
+
+const highScoresContainer = document.createElement("div");
+highScoresContainer.id = "highScoresContainer"; 
+highScoresContainer.classList = "highScoresContainer";
+highScoresDialog.appendChild(highScoresContainer);
+
+const closeHighScoresButton = createButton(
+  "closeButton",
+  "Close",
+  highScoresDialog
+);
+closeHighScoresButton.addEventListener("click", () => {
+  highScoresDialog.close();
+});
+
+document.body.appendChild(highScoresDialog);
+
 //создание элементов игрового поля
 const nonogramField = createDiv("nonogramField");
 const optionBlock = createDiv("optionBlock");
@@ -66,7 +92,7 @@ const changeThemeButton = createButton(
   "",
   headerBlockOptions
 );
-const bestScore = createButton("bestScore", "", headerBlockOptions);
+const bestScore = createButton("bestScore", "🏆", headerBlockOptions);
 const leftHintsField = createDiv("leftHintsField");
 const topHintsField = createDiv("topHintsField");
 const topLevelOfField = createDiv("topLevelOfField");
@@ -254,9 +280,11 @@ function checkSchemaAnswer(index, value) {
   }
 
   if (JSON.stringify(flatArrayForCheck) === JSON.stringify(flatArray)) {
-    winningTime = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+    winningTime = `${String(minutes).padStart(2, "0")}:${String(
+      seconds
+    ).padStart(2, "0")}`;
     infoMessage.textContent = `Great!
-    You have solved the nonogram in ${winningTime}!`
+      You have solved the nonogram in ${winningTime}!`;
     infoMessage.style.visibility = "visible";
     showSolutionButton.disabled = true;
     showSolutionButton.style.pointerEvents = "none";
@@ -267,6 +295,7 @@ function checkSchemaAnswer(index, value) {
       cell.classList.add("disabledCell");
     });
 
+    saveResult(selectedText, winningTime, chosenDifficulty);
     stopTimer();
   } else {
     console.log("continue", flatArray, flatArrayForCheck);
@@ -418,6 +447,62 @@ function filterSchemesByDifficulty(difficulty) {
   }
 }
 
+function saveResult(name, time, difficulty) {
+  let bestScores = JSON.parse(localStorage.getItem("bestScores")) || [];
+  const newScore = {
+    name: name,
+    time: time,
+    difficulty: difficulty,
+  };
+  bestScores.push(newScore);
+
+  bestScores.sort((a, b) => {
+    const [aMin, aSec] = a.time.split(":").map(Number);
+    const [bMin, bSec] = b.time.split(":").map(Number);
+    const aTotal = aMin * 60 + aSec;
+    const bTotal = bMin * 60 + bSec;
+    return aTotal - bTotal;
+  });
+  bestScores = bestScores.slice(0, 5);
+  localStorage.setItem("bestScores", JSON.stringify(bestScores));
+}
+
+function displayHighScores() {
+  const highScores = JSON.parse(localStorage.getItem("bestScores")) || [];
+  const highScoresContainer = document.getElementById("highScoresContainer"); //
+
+  highScoresContainer.innerHTML = "";
+
+  const headerRow = document.createElement("div");
+  headerRow.className = "highScoresRow highScoresHeader";
+  headerRow.innerHTML = `
+      <div class="highScoresCell">Nonogram</div>
+      <div class="highScoresCell">Level</div>
+      <div class="highScoresCell">Time</div>
+    `;
+  highScoresContainer.appendChild(headerRow);
+
+  if (highScores.length === 0) {
+    const emptyRow = document.createElement("div");
+    emptyRow.className = "highScoresRow";
+    emptyRow.innerHTML = `
+        <div class="highScoresCell" colspan="3">no results yet</div>
+      `;
+    highScoresContainer.appendChild(emptyRow);
+    return;
+  }
+  highScores.forEach((score) => {
+    const row = document.createElement("div");
+    row.className = "highScoresRow";
+    row.innerHTML = `
+        <div class="highScoresCell">${score.name}</div>
+        <div class="highScoresCell">${score.difficulty}</div>
+        <div class="highScoresCell">${score.time}</div>
+      `;
+    highScoresContainer.appendChild(row);
+  });
+}
+
 //инициализация
 function initGame(difficulty, number) {
   document.body.appendChild(optionBlock);
@@ -534,5 +619,9 @@ closeButton.addEventListener("click", (event) => {
   close();
 });
 
+bestScore.addEventListener("click", () => {
+  displayHighScores();
+  highScoresDialog.showModal(); // Открываем dialog
+});
 //вызов инициализации
 initGame(chosenDifficulty, indexOfSchema);
