@@ -78,8 +78,10 @@ const infoBlock = createDiv("infoBlock", footerBlock);
 const infoMessage = createDiv(
   "infoMessage",
   infoBlock,
-  "Great! You have solved the nonogram!"
+  `Great!
+   You have solved the nonogram in XX:XX seconds!`
 );
+let winningTime = "";
 
 const selectDifficulty = document.createElement("select");
 selectDifficulty.classList = "selectDifficulty";
@@ -252,6 +254,9 @@ function checkSchemaAnswer(index, value) {
   }
 
   if (JSON.stringify(flatArrayForCheck) === JSON.stringify(flatArray)) {
+    winningTime = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+    infoMessage.textContent = `Great!
+    You have solved the nonogram in ${winningTime}!`
     infoMessage.style.visibility = "visible";
     showSolutionButton.disabled = true;
     showSolutionButton.style.pointerEvents = "none";
