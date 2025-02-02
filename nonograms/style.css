@@ -232,11 +232,11 @@ dialog::backdrop {
 }
 
 .cellBorderRow {
-  border-right: 3px solid rgb(141, 44, 75);
+  border-right: 3px solid rgb(0, 0, 0);
 }
 
 .cellBorderColumn {
-  border-bottom: 3px solid rgb(141, 44, 75);
+  border-bottom: 3px solid rgb(0, 0, 0);
 }
 
 .leftHintsField {
