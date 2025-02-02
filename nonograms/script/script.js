@@ -23,6 +23,11 @@ let timerStarted = false;
 let minutes = 0;
 let seconds = 0;
 
+const hatchSound = new Audio("../nonograms/sounds/pencilAdd.wav");
+const crossSound = new Audio("../nonograms/sounds/pencilCross.wav");
+const eraseSound = new Audio("../nonograms/sounds/pencilErase.wav");
+const winSound = new Audio("../nonograms/sounds/win.mp3");
+
 //создание элементов модалки
 const dialog = document.createElement("dialog");
 dialog.id = "myDialog";
@@ -250,6 +255,7 @@ function checkSchemaAnswer(index, value) {
     infoMessage.style.visibility = "visible";
     showSolutionButton.disabled = true;
     showSolutionButton.style.pointerEvents = "none";
+    winSound.play();
 
     const cellsArray = document.querySelectorAll(".nonogramField .cell");
     cellsArray.forEach((cell) => {
@@ -439,10 +445,12 @@ function addCellEventListeners() {
       if (cell.classList.contains("shadedCell")) {
         cell.classList.remove("shadedCell");
         checkSchemaAnswer(index, 0);
+        eraseSound.play();
       } else {
         cell.classList.remove("crossCell");
         cell.classList.add("shadedCell");
         checkSchemaAnswer(index, 1);
+        hatchSound.play();
       }
     });
 
@@ -456,10 +464,12 @@ function addCellEventListeners() {
       if (cell.classList.contains("crossCell")) {
         cell.classList.remove("crossCell");
         checkSchemaAnswer(index, null);
+        eraseSound.play();
       } else {
         cell.classList.remove("shadedCell");
         cell.classList.add("crossCell");
         checkSchemaAnswer(index, 0);
+        crossSound.play();
       }
     });
   });
