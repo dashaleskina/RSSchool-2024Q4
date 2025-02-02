@@ -57,7 +57,7 @@ highScoresTitle.textContent = "High Scores";
 highScoresDialog.appendChild(highScoresTitle);
 
 const highScoresContainer = document.createElement("div");
-highScoresContainer.id = "highScoresContainer"; 
+highScoresContainer.id = "highScoresContainer";
 highScoresContainer.classList = "highScoresContainer";
 highScoresDialog.appendChild(highScoresContainer);
 
@@ -89,10 +89,14 @@ const openMenuButton = createButton(
 );
 const changeThemeButton = createButton(
   "changeThemeButton",
-  "",
+  "dark theme 🌃",
   headerBlockOptions
 );
-const bestScore = createButton("bestScore", "🏆", headerBlockOptions);
+const bestScore = createButton(
+  "bestScore",
+  "best score 🏆",
+  headerBlockOptions
+);
 const leftHintsField = createDiv("leftHintsField");
 const topHintsField = createDiv("topHintsField");
 const topLevelOfField = createDiv("topLevelOfField");
@@ -564,6 +568,29 @@ function addCellEventListeners() {
     });
   });
 }
+
+changeThemeButton.addEventListener("click", () => {
+  document.body.classList.toggle("dark-theme");
+
+  if (document.body.classList.contains("dark-theme")) {
+    changeThemeButton.textContent = "light theme";
+    localStorage.setItem("theme", "dark");
+  } else {
+    changeThemeButton.textContent = "dark theme 🌃";
+    localStorage.setItem("theme", "light");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-theme")
+    changeThemeButton.textContent = "light theme 🌅";
+  } else {
+    changeThemeButton.textContent = "dark theme 🌃";
+  }
+});
 
 // слушатели
 selectDifficulty.addEventListener("change", () => {

@@ -33,7 +33,8 @@ body {
   max-width: 500px;
 }
 
-dialog, .highScoresDialog {
+dialog,
+.highScoresDialog {
   position: fixed;
   min-width: 150px;
   width: 250px;
@@ -137,12 +138,21 @@ dialog::backdrop {
 .changeThemeButton,
 .bestScore,
 .openMenuButton {
-  width: 30px;
+  width: 100px;
   height: 30px;
-  border-radius: 100%;
   background-color: rgb(255, 229, 154);
   border: 3px solid rgb(202, 103, 134);
   box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.changeThemeButton:hover,
+.bestScore:hover,
+.openMenuButton:hover {
+    background-color: rgb(174, 230, 248);
 }
 
 .bestScore {
@@ -203,7 +213,7 @@ dialog::backdrop {
 .randomGameButton:hover,
 .resetButton:hover,
 .showSolutionButton:hover {
-  background-color: rgb(255, 208, 149);
+  background-color: rgb(248, 214, 174);
 }
 
 .cell {
@@ -258,7 +268,6 @@ dialog::backdrop {
 
 .footerBlock {
   display: flex;
-
 }
 
 .infoBlock {
@@ -276,7 +285,7 @@ dialog::backdrop {
 
 .timer {
   display: flex;
-  margin-top: 10px;
+  padding: 5px 0 5px 0;
   width: 50%;
   gap: 2px;
   justify-content: center;
@@ -292,22 +301,22 @@ dialog::backdrop {
 }
 
 .highScoresDialog {
-    min-width: 400px;
-    padding: 10px;
-    padding-right: 5px;
+  min-width: 400px;
+  padding: 10px;
+  padding-right: 5px;
 }
 
 .highScoresHeader {
-    color: aquamarine;
+  color: aquamarine;
 }
 
 .highScoresRow {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .highScoresCell {
-    width: 33%;
+  width: 33%;
 }
 
 @media (max-width: 900px) {
@@ -319,4 +328,46 @@ dialog::backdrop {
     opacity: 1;
     visibility: visible;
   }
+}
+
+/* для темной темы */
+body.dark-theme {
+  background-image: url(../nonograms/images/backDark.jpg);
+  color: #ffffff;
+}
+
+.dark-theme .gamepad,
+.dark-theme .optionBlock,
+.dark-theme .highScoresDialog,
+.dark-theme .dialogWrapper,
+.dark-theme dialog {
+  background-color: rgb(10, 84, 169);
+  border-color: rgb(252, 233, 213);
+}
+.dark-theme .highScoresDialog {
+  color: #ffffff;
+}
+.dark-theme .closeButton {
+  background-color: rgb(21, 67, 98);
+  color: rgb(236, 227, 214);
+  border-color: rgb(236, 227, 214);
+}
+.dark-theme .randomGameButton,
+.dark-theme .showSolutionButton,
+.dark-theme .resetButton,
+.dark-theme .openMenuButton,
+.dark-theme .changeThemeButton,
+.dark-theme .bestScore {
+  background-color: rgb(61, 131, 183);
+  color: rgb(250, 218, 142);
+  border-color: rgb(87, 139, 243);
+}
+
+.dark-theme .randomGameButton:hover,
+.dark-theme .showSolutionButton:hover,
+.dark-theme .resetButton:hover,
+.dark-theme .closeButton:hover,
+.dark-theme .changeThemeButton:hover,
+.dark-theme .bestScore:hover {
+  background-color: rgb(229, 146, 173);
 }
