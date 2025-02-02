@@ -234,7 +234,7 @@ dialog::backdrop {
 }
 
 .crossCell {
-  background-image: url("/nonograms/images/cross.png");
+  background-image: url("../nonograms/images/cross.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
