@@ -179,6 +179,7 @@ dialog::backdrop {
   width: 100px;
   background-color: rgb(255, 235, 145);
   text-align: center;
+  font-size: 10px;
 }
 
 .resetButton,
