@@ -152,7 +152,7 @@ dialog::backdrop {
 .changeThemeButton:hover,
 .bestScore:hover,
 .openMenuButton:hover {
-    background-color: rgb(174, 230, 248);
+  background-color: rgb(174, 230, 248);
 }
 
 .bestScore {
@@ -341,7 +341,7 @@ body.dark-theme {
 .dark-theme .highScoresDialog,
 .dark-theme .dialogWrapper,
 .dark-theme dialog {
-  background-color: rgb(4, 67, 140);
+  background-color: rgb(28, 94, 169);
   border-color: rgb(252, 233, 213);
 }
 .dark-theme .highScoresDialog {
@@ -373,19 +373,17 @@ body.dark-theme {
 }
 
 .dark-theme .shadedCell {
-    background-color: rgb(236, 227, 214);
+  background-color: rgb(236, 227, 214);
 }
 
-.dark-theme  .cellBorderRow {
-    border-right: 3px solid rgb(157, 152, 146);
-  }
-  
-  .dark-theme  .cellBorderColumn {
-    border-bottom: 3px solid rgb(157, 152, 146);
-  }
+.dark-theme .cellBorderRow {
+  border-right: 4px solid rgb(0, 0, 0);
+}
 
-  .dark-theme .cell {
+.dark-theme .cellBorderColumn {
+  border-bottom: 4px solid rgb(0, 0, 0);
+}
 
-    outline: 1px solid rgb(236, 227, 214);
-
-  }
+.dark-theme .cell {
+  outline: 1px solid rgb(236, 227, 214);
+}
