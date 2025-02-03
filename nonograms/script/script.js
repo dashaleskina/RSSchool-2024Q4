@@ -460,6 +460,10 @@ function saveResult(name, time, difficulty) {
   };
   bestScores.push(newScore);
 
+  if (bestScore.length > 5) {
+    bestScores = bestScores.slice(-5);
+  }
+
   bestScores.sort((a, b) => {
     const [aMin, aSec] = a.time.split(":").map(Number);
     const [bMin, bSec] = b.time.split(":").map(Number);
@@ -467,7 +471,6 @@ function saveResult(name, time, difficulty) {
     const bTotal = bMin * 60 + bSec;
     return aTotal - bTotal;
   });
-  bestScores = bestScores.slice(0, 5);
   localStorage.setItem("bestScores", JSON.stringify(bestScores));
 }
 
