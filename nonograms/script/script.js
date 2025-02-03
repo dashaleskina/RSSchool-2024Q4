@@ -22,6 +22,7 @@ let timerInterval;
 let timerStarted = false;
 let minutes = 0;
 let seconds = 0;
+let isSoundOn = false;
 
 const hatchSound = new Audio("../nonograms/sounds/pencilAdd.wav");
 const crossSound = new Audio("../nonograms/sounds/pencilCross.wav");
@@ -44,6 +45,11 @@ const showSolutionButtonInDialog = createButton(
   wrapper
 );
 const resetButtonInDialog = createButton("resetButton", "Reset", wrapper);
+const toggleSoundButtonInDialog = createButton(
+    "toggleSoundButton",
+    "turn off sound 🔇",
+    wrapper
+  );
 const closeButton = createButton("closeButton", "Close", wrapper);
 document.body.appendChild(dialog);
 
@@ -155,6 +161,11 @@ const showSolutionButton = createButton(
   optionBlock
 );
 const resetButton = createButton("resetButton", "Reset", optionBlock);
+const toggleSoundButton = createButton(
+    "toggleSoundButton",
+    "turn off sound 🔇",
+    optionBlock
+  );
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -292,7 +303,7 @@ function checkSchemaAnswer(index, value) {
     infoMessage.style.visibility = "visible";
     showSolutionButton.disabled = true;
     showSolutionButton.style.pointerEvents = "none";
-    winSound.play();
+    playSound(winSound)
 
     const cellsArray = document.querySelectorAll(".nonogramField .cell");
     cellsArray.forEach((cell) => {
@@ -510,6 +521,12 @@ function displayHighScores() {
   });
 }
 
+function playSound(sound) {
+    if (!isSoundOn) {
+        sound.play();
+    }
+}
+
 //инициализация
 function initGame(difficulty, number) {
   document.body.appendChild(optionBlock);
@@ -542,12 +559,14 @@ function addCellEventListeners() {
       if (cell.classList.contains("shadedCell")) {
         cell.classList.remove("shadedCell");
         checkSchemaAnswer(index, 0);
-        eraseSound.play();
+        playSound(eraseSound)
+        // eraseSound.play();
       } else {
         cell.classList.remove("crossCell");
         cell.classList.add("shadedCell");
         checkSchemaAnswer(index, 1);
-        hatchSound.play();
+        playSound(hatchSound);
+        // hatchSound.play();
       }
     });
 
@@ -561,17 +580,23 @@ function addCellEventListeners() {
       if (cell.classList.contains("crossCell")) {
         cell.classList.remove("crossCell");
         checkSchemaAnswer(index, null);
-        eraseSound.play();
+        playSound(eraseSound)
       } else {
         cell.classList.remove("shadedCell");
         cell.classList.add("crossCell");
         checkSchemaAnswer(index, 0);
-        crossSound.play();
+        playSound(crossSound)
       }
     });
   });
 }
 
+function changeSoundOption (button) {
+    isSoundOn = !isSoundOn;
+    button.textContent = isSoundOn ? "turn on sound 🔈" : "turn off sound 🔇"
+    }
+
+// слушатели
 changeThemeButton.addEventListener("click", () => {
   document.body.classList.toggle("dark-theme");
 
@@ -595,7 +620,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// слушатели
 selectDifficulty.addEventListener("change", () => {
   const selectedDifficulty = selectDifficulty.value;
   filterSchemesByDifficulty(selectedDifficulty);
@@ -653,5 +677,9 @@ bestScore.addEventListener("click", () => {
   displayHighScores();
   highScoresDialog.showModal(); // Открываем dialog
 });
+toggleSoundButton.addEventListener("click", () => changeSoundOption(toggleSoundButton));
+toggleSoundButtonInDialog.addEventListener("click", () => changeSoundOption(toggleSoundButtonInDialog));
+
+
 //вызов инициализации
 initGame(chosenDifficulty, indexOfSchema);
