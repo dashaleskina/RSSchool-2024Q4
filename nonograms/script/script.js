@@ -401,6 +401,12 @@ function resetGame() {
   });
   showSolutionButton.style.pointerEvents = "auto";
   infoMessage.style.visibility = "hidden";
+  
+  stopTimer();
+  timerStarted = false;
+  minutes = 0;
+  seconds = 0;
+  updateTimerDisplay();
 }
 
 function startTimer() {
