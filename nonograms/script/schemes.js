@@ -6,7 +6,7 @@ export const schemesNames = [
   "rabbit 🐰",
   "bug 🪲",
   "snowman ☃️",
-  "cherry 🐈‍⬛",
+  "cherry 🍒",
   "cat 🐈‍⬛",
   "heart 💖",
   "coffee ☕",

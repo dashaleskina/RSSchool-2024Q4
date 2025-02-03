@@ -46,10 +46,10 @@ const showSolutionButtonInDialog = createButton(
 );
 const resetButtonInDialog = createButton("resetButton", "Reset", wrapper);
 const toggleSoundButtonInDialog = createButton(
-    "toggleSoundButton",
-    "turn off sound 🔇",
-    wrapper
-  );
+  "toggleSoundButton",
+  "turn off sound 🔇",
+  wrapper
+);
 const closeButton = createButton("closeButton", "Close", wrapper);
 document.body.appendChild(dialog);
 
@@ -162,10 +162,10 @@ const showSolutionButton = createButton(
 );
 const resetButton = createButton("resetButton", "Reset", optionBlock);
 const toggleSoundButton = createButton(
-    "toggleSoundButton",
-    "turn off sound 🔇",
-    optionBlock
-  );
+  "toggleSoundButton",
+  "turn off sound 🔇",
+  optionBlock
+);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -295,15 +295,16 @@ function checkSchemaAnswer(index, value) {
   }
 
   if (JSON.stringify(flatArrayForCheck) === JSON.stringify(flatArray)) {
+    const totalTimeInSeconds = minutes * 60 + seconds;
     winningTime = `${String(minutes).padStart(2, "0")}:${String(
       seconds
     ).padStart(2, "0")}`;
     infoMessage.textContent = `Great!
-      You have solved the nonogram in ${winningTime}!`;
+      You have solved the nonogram in ${totalTimeInSeconds} seconds!`;
     infoMessage.style.visibility = "visible";
     showSolutionButton.disabled = true;
     showSolutionButton.style.pointerEvents = "none";
-    playSound(winSound)
+    playSound(winSound);
 
     const cellsArray = document.querySelectorAll(".nonogramField .cell");
     cellsArray.forEach((cell) => {
@@ -400,8 +401,9 @@ function resetGame() {
     return item === 1 ? 0 : item;
   });
   showSolutionButton.style.pointerEvents = "auto";
+  showSolutionButton.disabled = false;
   infoMessage.style.visibility = "hidden";
-  
+
   stopTimer();
   timerStarted = false;
   minutes = 0;
@@ -477,7 +479,7 @@ function saveResult(name, time, difficulty) {
   };
   bestScores.push(newScore);
 
-  if (bestScore.length > 5) {
+  if (bestScores.length > 5) {
     bestScores = bestScores.slice(-5);
   }
 
@@ -528,9 +530,9 @@ function displayHighScores() {
 }
 
 function playSound(sound) {
-    if (!isSoundOn) {
-        sound.play();
-    }
+  if (!isSoundOn) {
+    sound.play();
+  }
 }
 
 //инициализация
@@ -565,7 +567,7 @@ function addCellEventListeners() {
       if (cell.classList.contains("shadedCell")) {
         cell.classList.remove("shadedCell");
         checkSchemaAnswer(index, 0);
-        playSound(eraseSound)
+        playSound(eraseSound);
         // eraseSound.play();
       } else {
         cell.classList.remove("crossCell");
@@ -586,21 +588,21 @@ function addCellEventListeners() {
       if (cell.classList.contains("crossCell")) {
         cell.classList.remove("crossCell");
         checkSchemaAnswer(index, null);
-        playSound(eraseSound)
+        playSound(eraseSound);
       } else {
         cell.classList.remove("shadedCell");
         cell.classList.add("crossCell");
         checkSchemaAnswer(index, 0);
-        playSound(crossSound)
+        playSound(crossSound);
       }
     });
   });
 }
 
-function changeSoundOption (button) {
-    isSoundOn = !isSoundOn;
-    button.textContent = isSoundOn ? "turn on sound 🔈" : "turn off sound 🔇"
-    }
+function changeSoundOption(button) {
+  isSoundOn = !isSoundOn;
+  button.textContent = isSoundOn ? "turn on sound 🔈" : "turn off sound 🔇";
+}
 
 // слушатели
 changeThemeButton.addEventListener("click", () => {
@@ -619,7 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme");
 
   if (savedTheme === "dark") {
-    document.body.classList.add("dark-theme")
+    document.body.classList.add("dark-theme");
     changeThemeButton.textContent = "light theme 🌅";
   } else {
     changeThemeButton.textContent = "dark theme 🌃";
@@ -683,9 +685,12 @@ bestScore.addEventListener("click", () => {
   displayHighScores();
   highScoresDialog.showModal(); // Открываем dialog
 });
-toggleSoundButton.addEventListener("click", () => changeSoundOption(toggleSoundButton));
-toggleSoundButtonInDialog.addEventListener("click", () => changeSoundOption(toggleSoundButtonInDialog));
-
+toggleSoundButton.addEventListener("click", () =>
+  changeSoundOption(toggleSoundButton)
+);
+toggleSoundButtonInDialog.addEventListener("click", () =>
+  changeSoundOption(toggleSoundButtonInDialog)
+);
 
 //вызов инициализации
 initGame(chosenDifficulty, indexOfSchema);
